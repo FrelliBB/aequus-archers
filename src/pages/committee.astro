@@ -1,0 +1,193 @@
+---
+import Page from "../layouts/Page.astro";
+
+// People who run the club. Add a person by filling in a name, a short bio,
+// and dropping a photo at the matching path in /public/images/team/.
+const coaches = [
+	{ role: "Coach", level: "Archery GB qualified", photo: "/images/team/coach-1.jpg" },
+	{ role: "Coach", level: "Archery GB qualified", photo: "/images/team/coach-2.jpg" },
+	{ role: "Coach", level: "Archery GB qualified", photo: "/images/team/coach-3.jpg" },
+	{ role: "Session Leader", level: "Experienced archer", photo: "/images/team/session-leader.jpg" },
+];
+
+const committee = [
+	{ role: "Chair", photo: "/images/team/chair.jpg" },
+	{ role: "Secretary", photo: "/images/team/secretary.jpg" },
+	{ role: "Treasurer", photo: "/images/team/treasurer.jpg" },
+	{ role: "Records Officer", photo: "/images/team/records-officer.jpg" },
+	{ role: "Safeguarding Officer", photo: "/images/team/safeguarding-officer.jpg" },
+	{ role: "Membership Secretary", photo: "/images/team/membership-secretary.jpg" },
+];
+---
+
+<Page
+	title="Meet the team"
+	description="Meet the friendly volunteer committee and qualified coaching team who run Aequus Archers."
+	intro="We’re a volunteer-run club, and it’s our people who make it so welcoming — meet the coaches who’ll get you started and the committee who keep things running."
+>
+	<section class="has-figure">
+		<h2>Our committee &amp; coaches</h2>
+		<p>
+			Everything at Aequus Archers is run by volunteers who give their time because they love the
+			sport and the community around it. Whether you’re booking your first taster or settling in as
+			a member, these are some of the friendly faces you’ll meet.
+		</p>
+
+		<article class="profile">
+			<img
+				class="profile-photo"
+				src="/images/team/clare-rutherford.jpg"
+				alt="Clare Rutherford, Members &amp; Coaches Secretary and Session Coach"
+				width="240"
+				height="320"
+				loading="lazy"
+			/>
+			<div class="profile-body">
+				<div class="role">Members &amp; Coaches Secretary · Session Coach</div>
+				<h3 class="name">Clare Rutherford</h3>
+				<p>
+					I fell in love with archery fairly recently. It was around the summer of 2020, as the
+					Covid lockdown started to ease, and I was looking for something I could do outdoors that
+					was both mentally and physically stimulating. Being relatively new to the area and not
+					knowing many people locally, I found archery was one of the first sports allowed to resume
+					— albeit under social distancing restrictions.
+				</p>
+				<p>
+					So in August that year I joined a beginners’ course and haven’t looked back since. Archery
+					got me through a very difficult time in my life and, while I know I won’t be the next
+					Olympic gold medallist, I love the relaxation that shooting a bow brings and the thrill of
+					hitting that elusive gold. It’s an activity where I can set my own goals and achieve them
+					at my own pace.
+				</p>
+				<p>
+					The social aspect is important to me, and I soon realised the best way to meet people was
+					volunteering to help out with the many club activities that run through the outdoor season.
+					I particularly enjoy coaching our taster sessions and beginners’ courses — there’s
+					something very satisfying about helping others develop and grow.
+				</p>
+				<p>
+					My role on the committee is focused on the activities involving our coaches, like taster
+					sessions and beginners’ courses. Part of my remit is making sure our coaches have all the
+					documentation they need, and that everyone who comes through a session or joins as a new
+					member has what they need to feel welcome, happy and valued. I also keep a record of all
+					our equipment.
+				</p>
+			</div>
+		</article>
+	</section>
+
+	<section>
+		<h2>Our coaches</h2>
+		<p class="muted">
+			Every session is led by an experienced, Archery GB–qualified coach. More profiles coming soon.
+		</p>
+		<div class="card-grid">
+			{
+				coaches.map((c) => (
+					<div class="person">
+						<img class="photo" src={c.photo} alt={`${c.role} at Aequus Archers`} loading="lazy" />
+						<div class="role">{c.role}</div>
+						<div class="name">Name coming soon</div>
+						<div class="muted">{c.level}</div>
+					</div>
+				))
+			}
+		</div>
+	</section>
+
+	<section>
+		<h2>Our committee</h2>
+		<p class="muted">The volunteers who keep the club running. More profiles coming soon.</p>
+		<div class="card-grid">
+			{
+				committee.map((m) => (
+					<div class="person">
+						<img class="photo" src={m.photo} alt={`${m.role} at Aequus Archers`} loading="lazy" />
+						<div class="role">{m.role}</div>
+						<div class="name">Name coming soon</div>
+						<div class="muted">A short bio will go here.</div>
+					</div>
+				))
+			}
+		</div>
+	</section>
+
+	<section>
+		<div class="note">
+			To add or update someone, edit <code>src/pages/committee.astro</code> — replace “Name coming
+			soon” with their name and bio, and drop a photo at the matching path in
+			<code>public/images/team/</code> (keep the same filename and it appears automatically).
+		</div>
+	</section>
+
+	<style>
+		.profile {
+			display: grid;
+			grid-template-columns: 240px 1fr;
+			gap: 30px;
+			align-items: start;
+			margin-top: 18px;
+		}
+		.profile-photo {
+			width: 100%;
+			aspect-ratio: 3 / 4;
+			object-fit: cover;
+			border-radius: var(--aeq-radius);
+			background: var(--aeq-tile);
+		}
+		.profile-body .role {
+			font-size: 0.875rem;
+			text-transform: uppercase;
+			letter-spacing: 0.05em;
+			color: var(--aeq-primary);
+			font-weight: 700;
+		}
+		.profile-body .name {
+			font-size: 1.625rem;
+			font-weight: 700;
+			color: var(--aeq-primary-dark);
+			margin: 4px 0 12px;
+		}
+		.profile-body p {
+			font-size: 1.0625rem;
+			margin: 0 0 12px;
+			max-width: 62ch;
+		}
+		.person .photo {
+			width: 100%;
+			aspect-ratio: 1 / 1;
+			object-fit: cover;
+			display: block;
+			border-radius: var(--aeq-radius);
+			background: var(--aeq-tile);
+		}
+		.person .role {
+			font-size: 0.875rem;
+			text-transform: uppercase;
+			letter-spacing: 0.05em;
+			color: var(--aeq-primary);
+			font-weight: 700;
+			margin-top: 12px;
+		}
+		.person .name {
+			font-size: 1.0625rem;
+			font-weight: 700;
+			color: var(--aeq-ink);
+			margin-top: 2px;
+		}
+		.person .muted {
+			font-size: 1rem;
+			color: var(--aeq-muted);
+			margin-top: 2px;
+		}
+		@media (max-width: 560px) {
+			.profile {
+				grid-template-columns: 1fr;
+				gap: 16px;
+			}
+			.profile-photo {
+				max-width: 220px;
+			}
+		}
+	</style>
+</Page>

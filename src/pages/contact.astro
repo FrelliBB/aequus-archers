@@ -1,0 +1,133 @@
+---
+import Page from "../layouts/Page.astro";
+import { INSTAGRAM_URL, FACEBOOK_URL } from "../consts";
+---
+
+<Page
+	title="Contact us"
+	description="Get in touch with Aequus Archers."
+	intro="Questions about sessions, membership or anything else? Drop us a message."
+>
+	<section class="contact">
+		<form class="contact-form panel" action="/api/contact" method="POST">
+			<p class="form-error" id="form-error" hidden>
+				Sorry, something went wrong sending your message. Please try again, or reach us on social
+				media.
+			</p>
+
+			<input type="checkbox" name="botcheck" tabindex="-1" autocomplete="off" style="display:none" />
+
+			<label>
+				<span>Your name</span>
+				<input type="text" name="name" required />
+			</label>
+			<label>
+				<span>Email</span>
+				<input type="email" name="email" required />
+			</label>
+			<label>
+				<span>Message</span>
+				<textarea name="message" rows="5" required></textarea>
+			</label>
+			<button type="submit" class="btn">Send message</button>
+			<p class="privacy">
+				We'll only use your details to reply to your message. See our <a href="/policies#privacy"
+					>privacy policy</a
+				>.
+			</p>
+		</form>
+
+		<aside class="contact-side">
+			<h3>Prefer to reach us another way?</h3>
+			<p class="muted">You can also message us on social media.</p>
+			<div class="links">
+				<a href={INSTAGRAM_URL} target="_blank" rel="noopener">Instagram</a>
+				<a href={FACEBOOK_URL} target="_blank" rel="noopener">Facebook</a>
+			</div>
+		</aside>
+	</section>
+
+	<script>
+		if (new URLSearchParams(window.location.search).get("error")) {
+			const el = document.getElementById("form-error");
+			if (el) el.hidden = false;
+		}
+	</script>
+
+	<style>
+		.contact {
+			display: grid;
+			grid-template-columns: 1.4fr 1fr;
+			gap: 20px;
+			align-items: start;
+		}
+		.contact-form label {
+			display: block;
+			margin-bottom: 16px;
+		}
+		.contact-form label span {
+			display: block;
+			font-size: 1rem;
+			font-weight: 700;
+			color: var(--aeq-primary-dark);
+			margin-bottom: 6px;
+		}
+		.contact-form input,
+		.contact-form textarea {
+			width: 100%;
+			padding: 12px 14px;
+			border: 1px solid var(--aeq-line);
+			border-radius: 10px;
+			font-size: 1rem;
+			font-family: inherit;
+			background: #fff;
+			color: var(--aeq-ink);
+		}
+		.contact-form input:focus,
+		.contact-form textarea:focus {
+			outline: none;
+			border-color: var(--aeq-primary);
+			box-shadow: 0 0 0 3px var(--aeq-primary-soft);
+		}
+		.contact-form textarea {
+			resize: vertical;
+		}
+		.form-error {
+			background: var(--aeq-accent-soft);
+			color: var(--aeq-accent-text);
+			border-radius: 10px;
+			padding: 12px 14px;
+			font-size: 1rem;
+			margin: 0 0 18px;
+		}
+		.privacy {
+			font-size: 1rem;
+			color: var(--aeq-muted);
+			margin: 14px 0 0;
+		}
+		.contact-side .links {
+			display: flex;
+			gap: 14px;
+			margin-top: 10px;
+		}
+		.contact-side .links a {
+			display: inline-block;
+			color: var(--aeq-primary-dark);
+			font-weight: 700;
+			text-decoration: none;
+			padding: 8px 0;
+		}
+		.contact-side {
+			padding-top: 6px;
+		}
+		.contact-side .muted {
+			font-size: 1rem;
+			color: var(--aeq-muted);
+		}
+		@media (max-width: 720px) {
+			.contact {
+				grid-template-columns: 1fr;
+			}
+		}
+	</style>
+</Page>

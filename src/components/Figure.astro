@@ -1,0 +1,80 @@
+---
+/*
+  Inline candid photo with an optional caption.
+
+  Designed so photos can be added later: point `src` at a file in
+  /public/images (a friendly placeholder already lives at each path),
+  then just drop your real photo in at the same filename — no code change.
+
+  Usage:
+    <Figure src="/images/community/club-day.jpg"
+            alt="Members on the shooting line at a club day"
+            caption="A club day on the field at Milford"
+            align="right" />
+
+  align: "right" | "left" | "full"  (right/left float beside text on desktop,
+                                     full spans the column; all stack on mobile)
+  ratio: CSS aspect-ratio, e.g. "4 / 3" (default) or "3 / 2"
+*/
+interface Props {
+	src: string;
+	alt: string;
+	caption?: string;
+	align?: "right" | "left" | "full";
+	ratio?: string;
+	eager?: boolean;
+}
+const { src, alt, caption = "", align = "right", ratio = "4 / 3", eager = false } = Astro.props;
+---
+
+<figure class:list={["aeq-figure", align]}>
+	<img
+		src={src}
+		alt={alt}
+		loading={eager ? "eager" : "lazy"}
+		decoding="async"
+		style={`aspect-ratio:${ratio}`}
+	/>
+	{caption && <figcaption>{caption}</figcaption>}
+</figure>
+
+<style>
+	.aeq-figure {
+		margin: 0 0 18px;
+	}
+	.aeq-figure img {
+		width: 100%;
+		display: block;
+		object-fit: cover;
+		border-radius: var(--aeq-radius);
+		border: 1px solid var(--aeq-line);
+		background: var(--aeq-tile);
+	}
+	.aeq-figure figcaption {
+		font-size: 1rem;
+		color: var(--aeq-muted);
+		font-style: italic;
+		margin-top: 8px;
+		line-height: 1.45;
+	}
+	/* Floated, sits beside text on wider screens */
+	.aeq-figure.right,
+	.aeq-figure.left {
+		max-width: 380px;
+	}
+	.aeq-figure.full {
+		max-width: none;
+	}
+	@media (min-width: 760px) {
+		.aeq-figure.right {
+			float: right;
+			width: 42%;
+			margin: 4px 0 14px 28px;
+		}
+		.aeq-figure.left {
+			float: left;
+			width: 42%;
+			margin: 4px 28px 14px 0;
+		}
+	}
+</style>

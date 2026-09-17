@@ -1,0 +1,128 @@
+---
+import Page from "../layouts/Page.astro";
+import Figure from "../components/Figure.astro";
+import { CLUB_RECORDS_URL } from "../consts";
+
+const AGB_CLASSIFICATIONS =
+	"https://archerygb.org/resources/find-a-document/awards/outdoor-classifications-and-handicaps";
+const AGB_PROGRESS = "https://archerygb.org/clubs/badges-and-awards/progress-awards-scheme";
+---
+
+<Page
+	title="Archery info"
+	description="How handicaps, classifications and badges work in archery, plus a link to our club scores."
+	intro="New to the detail of the sport? Here's how handicaps, classifications and badges work — and where to see club scores."
+>
+	<section id="handicaps" class="has-figure">
+		<h2>How handicaps work</h2>
+		<Figure
+			src="/images/community/target-detail.jpg"
+			alt="A close-up of arrows grouped in the gold of a target face"
+			caption="Chasing that elusive gold."
+			align="right"
+		/>
+		<p>
+				Your handicap is a measure of how well you've shot, regardless of the round, the distances
+				or the number of arrows. It runs from 0 (the best) to 150 (the worst). It's a logarithmic
+				scale: each 1-point reduction means shooting about 3.5% more accurately.
+			</p>
+			<p>
+				Every archer gets a handicap, much like in golf. It starts as the average of your first
+				three rounds, rounded down to a whole number. After that, if you shoot better than your
+				handicap it's lowered to the midpoint between your current handicap and the round just shot
+				(rounded down); if you shoot worse, it stays the same. There are separate handicaps for
+				indoors and outdoors, and for each bow type.
+			</p>
+			<p>
+				At the end of a season, handicaps are reassessed by averaging your three best, rounded up —
+				so your handicap can go up or down compared with your running one.
+			</p>
+			<p>
+				Handicaps are used in some competitions so everyone has an equal chance of winning. We
+				usually hold an end-of-season indoor Worcester and an outdoor Nationals competition in
+				September, both handicap events: an adjustment based on your handicap is added to your score,
+				and higher (worse) handicaps get a larger adjustment. Shoot a round at exactly your current
+				handicap and you'll finish on 1440.
+			</p>
+	</section>
+
+	<section id="classifications">
+		<h2>Classifications</h2>
+			<p>Indoors, classifications run from H (lowest) to A (highest).</p>
+			<p>
+				Outdoors, they begin at <strong>Archer</strong> tier (3rd, 2nd and 1st class), progress to
+				<strong>Bowman</strong> tier (3rd, 2nd and 1st class), and finish in the
+				<strong>Master Bowman</strong> tier: Master Bowman (MB), then Grand Master Bowman (GMB), and
+				finally Elite Master Bowman (EMB).
+			</p>
+			<p>
+				Archer and Bowman classifications can be earned at any club-level event; Master Bowman
+				classifications must be shot at a record-status competition.
+			</p>
+			<p>
+				Scores are based on handicap levels, so a given classification takes the same skill
+				whatever round you shoot — with different scores for different bow types, ages and genders.
+			</p>
+			<a class="btn" href={AGB_CLASSIFICATIONS} target="_blank" rel="noopener"
+				>Archery GB classification tables</a
+			>
+	</section>
+
+	<section id="badges">
+		<h2>Badges</h2>
+			<p>
+				Badges are awarded for classifications, both indoors and outdoors. Archer and Bowman tier
+				badges are awarded at club level; Master Bowman tier badges are awarded by Archery GB.
+			</p>
+			<h3>Portsmouth badges (indoor)</h3>
+			<p>
+				Start at a score of 500 for seniors, and 300 for juniors, longbows and barebows. One
+				qualifying score on a Portsmouth round earns the badge. They then rise in 25-point steps to
+				575, and in 5-point steps to the maximum score of 600.
+			</p>
+			<h3>252 badges (outdoor, or indoor at 20 yards)</h3>
+			<p>
+				You need a score of 252 twice, on different days, using imperial 5-zone scoring on a 122 cm
+				face, with the day's first 3 dozen arrows shot at the chosen distance. Distances range from
+				20 to 100 yards. (3 dozen is for recurve; barebow 4 dozen, longbow 4½ dozen, compound 2¾
+				dozen.) These arrows can be part of a normal round — for example, shoot a Short National to
+				go for the 50-yard 252.
+			</p>
+			<p class="note">
+				If you shoot a 252, highlight it on your score sheet for your first and second scores, and
+				let the records officer know.
+			</p>
+	</section>
+
+	<section id="junior-awards">
+		<h2>Junior progress awards</h2>
+		<p>
+			Archery GB's Progress Award Scheme offers progress badges for juniors — white, black, blue,
+			red and gold.
+		</p>
+		<a class="btn" href={AGB_PROGRESS} target="_blank" rel="noopener"
+			>Archery GB Progress Award Scheme</a
+		>
+	</section>
+
+	<section id="rounds">
+		<h2>Archery rounds</h2>
+		<p>
+			A plain-English guide to the common rounds — distances, arrow counts, target faces and
+			scoring, from Portsmouth and Bray indoors to National, Western and York/Hereford outdoors —
+			is coming soon.
+		</p>
+	</section>
+
+	<section id="scores" class="has-figure">
+		<h2>Club scores &amp; records</h2>
+		<Figure
+			src="/images/community/on-the-line.jpg"
+			alt="Aequus Archers members shooting together on the line"
+			caption="Members on the line during a club shoot."
+			align="left"
+		/>
+		<p>Members can view recorded scores, handicaps and club records on our scores site.</p>
+		<a class="btn" href={CLUB_RECORDS_URL} target="_blank" rel="noopener">View club scores</a>
+	</section>
+</Page>

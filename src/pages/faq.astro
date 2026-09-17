@@ -1,0 +1,103 @@
+---
+import Page from "../layouts/Page.astro";
+
+const faqs = [
+	{
+		q: "Do I need any experience or my own equipment?",
+		a: "No — all equipment is provided and every session is led by an experienced coach. Total beginners are very welcome.",
+	},
+	{
+		q: "How old do I need to be?",
+		a: "We welcome all ages. Children must be at least 110 cm tall to take part, and under-18s must be accompanied by a parent or guardian for the whole session.",
+	},
+	{
+		q: "What should I wear?",
+		a: "Flat, closed-toe shoes (no sandals or flip-flops), and comfortable clothes that aren't loose — avoid hoodie drawstrings, which can catch the bowstring. Tie long hair back, dress for the weather as we're outdoors, and bring sunscreen on sunny days.",
+	},
+	{
+		q: "How much does it cost?",
+		a: "Taster sessions are £15 (£10 for under-16s). Beginner's courses are £90 (£45 for under-18s).",
+	},
+	{
+		q: "What's the difference between a taster and a course?",
+		a: "A taster is a one-off 1.5-hour session to give archery a go. A beginner's course runs over four weekends (3 hours each) and finishes with the Archery GB certificate you need to join a club.",
+	},
+	{
+		q: "Do I have to become a member?",
+		a: "Not at all — come for a taster with no commitment. If you'd like to join, you complete a beginner's course first to earn your certificate, then you're welcome to become a member.",
+	},
+	{
+		q: "Where are sessions held?",
+		a: "At our outdoor field in Milford, Derbyshire, during the summer season.",
+	},
+	{
+		q: "I have a medical condition or need medication — can I still take part?",
+		a: "Yes. Please let us know in advance about any medical conditions or special needs, and bring any essential medication with you.",
+	},
+];
+---
+
+<Page
+	title="Frequently asked questions"
+	description="Common questions about trying archery with Aequus Archers."
+	intro="New to archery? Here are the things people ask us most."
+>
+	<section>
+		{
+			faqs.map((item) => (
+				<details class="faq">
+					<summary>{item.q}</summary>
+					<p>{item.a}</p>
+				</details>
+			))
+		}
+	</section>
+
+	<section class="outro">
+		<h2>Still have a question?</h2>
+		<p style="margin-left:auto;margin-right:auto;">We're happy to help — just get in touch.</p>
+		<a class="btn" href="/contact">Contact us</a>
+	</section>
+
+	<style>
+		.faq {
+			border-bottom: 1px solid var(--aeq-line);
+		}
+		.faq:first-of-type {
+			border-top: 1px solid var(--aeq-line);
+		}
+		.faq summary {
+			cursor: pointer;
+			font-weight: 700;
+			font-size: 1.0625rem;
+			color: var(--aeq-primary-dark);
+			padding: 16px 0;
+			list-style: none;
+			display: flex;
+			justify-content: space-between;
+			align-items: center;
+			gap: 12px;
+		}
+		.faq summary::-webkit-details-marker {
+			display: none;
+		}
+		.faq summary::after {
+			content: "+";
+			color: var(--aeq-accent);
+			font-size: 1.375rem;
+			font-weight: 700;
+			line-height: 1;
+		}
+		.faq[open] summary::after {
+			content: "–";
+		}
+		.faq p {
+			margin: 0 0 18px;
+			color: var(--aeq-muted);
+		}
+		.outro {
+			text-align: center;
+			padding-top: 36px;
+		}
+	</style>
+</Page>

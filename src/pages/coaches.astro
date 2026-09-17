@@ -1,0 +1,19 @@
+---
+// The coaches page has been merged into the combined "Meet the team" page.
+// This route now forwards visitors (and old bookmarks/links) to /committee.
+const target = "/committee";
+---
+
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta http-equiv="refresh" content={`0; url=${target}`} />
+		<link rel="canonical" href={target} />
+		<meta name="robots" content="noindex" />
+		<title>Meet the team — Aequus Archers</title>
+	</head>
+	<body>
+		<p>This page has moved to <a href={target}>Meet the team</a>.</p>
+	</body>
+</html>

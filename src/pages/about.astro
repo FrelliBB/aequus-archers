@@ -1,0 +1,125 @@
+---
+import Page from "../layouts/Page.astro";
+import Figure from "../components/Figure.astro";
+---
+
+<Page
+	title="About us"
+	description="Aequus Archers is a friendly, volunteer-run target archery club in Milford, Derbyshire, welcoming archers of every age and ability since 2012."
+	intro="A friendly, volunteer-run target archery club in Milford, Derbyshire — welcoming archers of every age and ability since 2012."
+>
+	<section class="has-figure">
+		<Figure
+			src="/images/community/our-story.jpg"
+			alt="Aequus Archers members over the years"
+			caption="Archers of every age and ability — the club since 2012."
+			align="right"
+		/>
+		<h2>Who we are</h2>
+		<p>
+			Founded in 2012 by a passionate group of coaches, Aequus Archers exists to promote archery as
+			a sport for everyone — irrespective of age, gender, ethnicity, background or circumstance.
+		</p>
+		<p>
+			Our name says it all: <em>aequus</em> is Latin for even, calm, equal, favourable, just and fair
+			— the spirit we try to bring to every session.
+		</p>
+	</section>
+
+	<section>
+		<h2>What we offer</h2>
+		<p>
+			Whether you’re curious to try something new or ready to take it further, there’s a welcoming
+			way in.
+		</p>
+		<div class="offer-grid">
+			<div class="offer">
+				<h3>Taster sessions</h3>
+				<p class="muted">A one-off 1.5-hour session to give archery a go. All equipment provided.</p>
+				<a class="offer-link" href="/sessions">See dates →</a>
+			</div>
+			<div class="offer">
+				<h3>Beginner’s courses</h3>
+				<p class="muted">
+					Four weekend sessions to learn the fundamentals and earn your Archery GB certificate.
+				</p>
+				<a class="offer-link" href="/sessions">See dates →</a>
+			</div>
+			<div class="offer">
+				<h3>Membership</h3>
+				<p class="muted">Completed a course? Join us and shoot regularly through the season.</p>
+				<a class="offer-link" href="#membership">How to join →</a>
+			</div>
+		</div>
+	</section>
+
+	<section id="membership">
+		<h2>Becoming a member</h2>
+		<p>
+			To join an Archery GB–affiliated club like ours, you first need to complete a beginner’s
+			course and receive your certificate. Once you have it, you’re welcome to join Aequus Archers
+			and shoot with us regularly throughout the season.
+		</p>
+		<p class="note">
+			Membership fees and how to pay are managed through the club — get in touch and we’ll talk
+			you through it.
+		</p>
+		<a class="btn" href="/contact">Ask about membership</a>
+	</section>
+
+	<section id="location" class="has-figure">
+		<h2>Where to find us</h2>
+		<Figure
+			src="/images/community/the-field.jpg"
+			alt="The Aequus Archers outdoor field at Milford, Derbyshire"
+			caption="Our outdoor field at Milford — free parking and a warm welcome."
+			align="left"
+		/>
+		<p>
+			All sessions take place at our outdoor field in Milford, Derbyshire, during the summer
+			season. Free parking and a warm welcome await.
+		</p>
+		<p class="note">
+			Exact directions, parking details and a map will be added here — for now, please <a
+				href="/contact">contact us</a
+			> if you need help finding us.
+		</p>
+	</section>
+
+	<section class="outro">
+		<h2>Come and have a go</h2>
+		<p style="margin-left:auto;margin-right:auto;">
+			Beginners are always welcome — pick a taster or course date to get started.
+		</p>
+		<a class="btn" href="/sessions">View upcoming sessions</a>
+	</section>
+
+	<style>
+		.offer-grid {
+			display: grid;
+			grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+			gap: 28px;
+			margin-top: 20px;
+		}
+		.offer {
+			border-top: 2px solid var(--aeq-line);
+			padding-top: 14px;
+		}
+		.offer-link {
+			display: inline-block;
+			font-weight: 700;
+			font-size: 1.0625rem;
+			color: var(--aeq-accent-text);
+			text-decoration: none;
+			padding: 8px 0;
+		}
+		.offer-link:hover {
+			text-decoration: underline;
+		}
+		.outro {
+			text-align: center;
+			padding-top: 36px;
+			border-top: 2px solid var(--aeq-line);
+		}
+	</style>
+</Page>
