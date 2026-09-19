@@ -2,6 +2,8 @@
 import Base from "../layouts/Base.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
 import { TASTERS, parseDate, fmt } from "../data/sessions";
+import { Image } from "astro:assets";
+import { photo } from "../lib/images";
 
 const today = new Date();
 today.setHours(0, 0, 0, 0);
@@ -30,13 +32,14 @@ const next = TASTERS.map((t) => ({ ...t, d: parseDate(t.date) }))
 			</ul>
 		</div>
 		<div class="media">
-			<img
+			<Image
 				class="photo photo--offset"
-				src="/images/hero.jpg"
+				src={photo("hero.jpg")}
 				alt="A club member drawing a compound bow on the field at Milford"
-				width="1600"
-				height="1066"
+				widths={[640, 960, 1280, 1600]}
+				sizes="(max-width: 860px) 100vw, 510px"
 				loading="eager"
+				fetchpriority="high"
 			/>
 			<a class="next" href="/sessions">
 				{
@@ -114,20 +117,22 @@ const next = TASTERS.map((t) => ({ ...t, d: parseDate(t.date) }))
 
 	<section class="gallery wrap" aria-label="Club photos">
 		<figure class="g1">
-			<img
+			<Image
 				class="photo"
-				src="/images/community/taster-smiles.jpg"
+				src={photo("community/taster-smiles.jpg")}
 				alt="Beginners smiling during a taster session"
-				loading="lazy"
+				widths={[640, 960, 1200]}
+				sizes="(max-width: 860px) 100vw, 600px"
 			/>
 			<figcaption>Beginners on the line at a taster session.</figcaption>
 		</figure>
 		<figure class="g2">
-			<img
+			<Image
 				class="photo photo--offset-sage"
-				src="/images/community/club-day.jpg"
+				src={photo("community/club-day.jpg")}
 				alt="Members together on a club day"
-				loading="lazy"
+				widths={[480, 800]}
+				sizes="(max-width: 860px) 100vw, 400px"
 			/>
 			<figcaption>A club day on the field.</figcaption>
 		</figure>

@@ -1,12 +1,14 @@
 ---
 import HeaderLink from "./HeaderLink.astro";
+import { Image } from "astro:assets";
 import { SITE_TITLE, CLUB_RECORDS_URL } from "../consts";
+import { photo } from "../lib/images";
 ---
 
 <header>
 	<nav class="wrap">
 		<a class="brand" href="/">
-			<img src="/images/logo.png" alt="" width="46" height="32" />
+			<Image src={photo("logo.png")} alt="" height={32} densities={[1, 2]} loading="eager" />
 			<span>{SITE_TITLE}</span>
 		</a>
 		<button class="nav-toggle" aria-expanded="false" aria-controls="nav-links">

@@ -1,22 +1,24 @@
 ---
+import { Image } from "astro:assets";
 import Page from "../layouts/Page.astro";
+import { photo } from "../lib/images";
 
 type Person = { role: string; photo: string; name?: string; bio?: string; level?: string };
 
 const coaches: Person[] = [
-	{ role: "Coach", level: "Archery GB qualified", photo: "/images/team/coach-1.jpg" },
-	{ role: "Coach", level: "Archery GB qualified", photo: "/images/team/coach-2.jpg" },
-	{ role: "Coach", level: "Archery GB qualified", photo: "/images/team/coach-3.jpg" },
-	{ role: "Session Leader", level: "Experienced archer", photo: "/images/team/session-leader.jpg" },
+	{ role: "Coach", level: "Archery GB qualified", photo: "team/coach-1.jpg" },
+	{ role: "Coach", level: "Archery GB qualified", photo: "team/coach-2.jpg" },
+	{ role: "Coach", level: "Archery GB qualified", photo: "team/coach-3.jpg" },
+	{ role: "Session Leader", level: "Experienced archer", photo: "team/session-leader.jpg" },
 ];
 
 const committee: Person[] = [
-	{ role: "Chair", photo: "/images/team/chair.jpg" },
-	{ role: "Secretary", photo: "/images/team/secretary.jpg" },
-	{ role: "Treasurer", photo: "/images/team/treasurer.jpg" },
-	{ role: "Records Officer", photo: "/images/team/records-officer.jpg" },
-	{ role: "Safeguarding Officer", photo: "/images/team/safeguarding-officer.jpg" },
-	{ role: "Membership Secretary", photo: "/images/team/membership-secretary.jpg" },
+	{ role: "Chair", photo: "team/chair.jpg" },
+	{ role: "Secretary", photo: "team/secretary.jpg" },
+	{ role: "Treasurer", photo: "team/treasurer.jpg" },
+	{ role: "Records Officer", photo: "team/records-officer.jpg" },
+	{ role: "Safeguarding Officer", photo: "team/safeguarding-officer.jpg" },
+	{ role: "Membership Secretary", photo: "team/membership-secretary.jpg" },
 ];
 ---
 
@@ -34,13 +36,12 @@ const committee: Person[] = [
 		</p>
 
 		<article class="profile">
-			<img
+			<Image
 				class="profile-photo"
-				src="/images/team/clare-rutherford.jpg"
+				src={photo("team/clare-rutherford.jpg")}
 				alt="Clare Rutherford, Members &amp; Coaches Secretary and Session Coach"
-				width="240"
-				height="320"
-				loading="lazy"
+				widths={[260, 480]}
+				sizes="260px"
 			/>
 			<div class="profile-body">
 				<div class="role">Members &amp; Coaches Secretary · Session Coach</div>
@@ -85,7 +86,7 @@ const committee: Person[] = [
 			{
 				coaches.map((c) => (
 					<div class="person">
-						<img class="photo" src={c.photo} alt={`${c.role} at Aequus Archers`} loading="lazy" />
+						<Image class="photo" src={photo(c.photo)} alt={`${c.role} at Aequus Archers`} widths={[300, 600]} sizes="260px" />
 						<div class="role">{c.role}</div>
 						{c.name && <div class="name">{c.name}</div>}
 						<div class="muted">{c.bio ?? c.level}</div>
@@ -102,7 +103,7 @@ const committee: Person[] = [
 			{
 				committee.map((m) => (
 					<div class="person">
-						<img class="photo" src={m.photo} alt={`${m.role} at Aequus Archers`} loading="lazy" />
+						<Image class="photo" src={photo(m.photo)} alt={`${m.role} at Aequus Archers`} widths={[300, 600]} sizes="260px" />
 						<div class="role">{m.role}</div>
 						{m.name && <div class="name">{m.name}</div>}
 						{m.bio && <div class="muted">{m.bio}</div>}

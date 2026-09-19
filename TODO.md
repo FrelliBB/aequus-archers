@@ -11,7 +11,7 @@ Outstanding items for the new site. The site auto-deploys from GitHub via Cloudf
 
 ## Photos
 
-- [ ] **Replace placeholder photos** — drop real photos into `public/images/community/` and `public/images/team/` with the same filenames. The homepage uses `taster-smiles.jpg` and `club-day.jpg`.
+- [ ] **Replace placeholder photos** — drop real photos into `src/assets/images/community/` and `src/assets/images/team/` with the same filenames. The homepage uses `taster-smiles.jpg` and `club-day.jpg`.
 
 ## Page content to write (currently placeholders)
 

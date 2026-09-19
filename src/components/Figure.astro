@@ -1,9 +1,12 @@
 ---
+import { Image } from "astro:assets";
+import { photo } from "../lib/images";
+
 /*
   Inline photo with an optional caption.
 
-  Point `src` at a file in /public/images. To swap a placeholder for a real
-  photo, drop the new file in at the same path.
+  `src` is a path inside src/assets/images, e.g. "community/club-day.jpg".
+  To swap a placeholder for a real photo, drop the new file in at the same path.
 
   align: "right" | "left" | "full"  (right/left float beside text on desktop,
                                      full spans the column; all stack on mobile)
@@ -31,12 +34,13 @@ const {
 ---
 
 <figure class:list={["fig", align]}>
-	<img
+	<Image
 		class:list={["photo", { "photo--offset": accent === "butter", "photo--offset-sage": accent === "sage" }]}
-		src={src}
+		src={photo(src)}
 		alt={alt}
+		widths={[480, 800, 1200]}
+		sizes={align === "full" ? "(max-width: 1080px) 100vw, 1040px" : "(max-width: 760px) 100vw, 440px"}
 		loading={eager ? "eager" : "lazy"}
-		decoding="async"
 		style={`aspect-ratio:${ratio}`}
 	/>
 	{caption && <figcaption>{caption}</figcaption>}

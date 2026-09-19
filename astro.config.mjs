@@ -10,6 +10,7 @@ export default defineConfig({
 	site: "https://www.aequusarchers.co.uk",
 	integrations: [mdx(), sitemap()],
 	adapter: cloudflare({
+		imageService: "compile",
 		platformProxy: {
 			enabled: true,
 		},

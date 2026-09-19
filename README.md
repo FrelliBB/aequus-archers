@@ -24,7 +24,7 @@ All run from the project root:
 - **Header / footer** — `src/components/Header.astro`, `src/components/Footer.astro`.
 - **Theme colours and fonts** — brand tokens are defined at the top of `src/styles/global.css` (`--pine`, `--coral`, `--butter`, `--paper`, etc.). Change them once and the whole site follows. Fonts are Fraunces (headings) and Figtree (body), self-hosted through Fontsource.
 - **Layouts** — `src/layouts/Base.astro` (head, header, footer) and `src/layouts/Page.astro` (standard content page with title and intro).
-- **Images** — `public/images/` (`logo.png`, `hero.jpg`).
+- **Images** — `src/assets/images/` (`logo.png`, `hero.jpg`, `community/`, `team/`). Astro resizes them and serves WebP at build time. To replace a photo, drop the new file in with the same filename.
 
 ## TODO (needs club input)
 
