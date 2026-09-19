@@ -11,7 +11,7 @@ All run from the project root:
 | `npm install`     | Install dependencies                         |
 | `npm run dev`     | Start local dev server at `localhost:4321`   |
 | `npm run build`   | Build the production site to `./dist/`       |
-| `npm run preview` | Preview the production build locally         |
+| `npm run preview` | Build, then preview it locally in workerd    |
 | `npm run deploy`  | Deploy to Cloudflare                         |
 
 ## Editing content
