@@ -1,0 +1,10 @@
+policies:
+  - anchor: safeguarding
+    title: Safeguarding policy
+    summary: How we keep children, young people and adults at risk safe at the club, and who to contact with a concern.
+  - anchor: privacy
+    title: Privacy policy
+    summary: What personal data we collect, why we collect it, and how we look after it.
+  - anchor: charter
+    title: Club charter
+    summary: Our values, code of conduct, and what members can expect from the club and each other.

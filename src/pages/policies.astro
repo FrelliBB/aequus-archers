@@ -1,24 +1,12 @@
 ---
+import { getCollection } from "astro:content";
 import Page from "../layouts/Page.astro";
 
-const policies: { id: string; title: string; blurb: string; href?: string }[] = [
-	{
-		id: "safeguarding",
-		title: "Safeguarding policy",
-		blurb:
-			"How we keep children, young people and adults at risk safe at the club, and who to contact with a concern.",
-	},
-	{
-		id: "privacy",
-		title: "Privacy policy",
-		blurb: "What personal data we collect, why we collect it, and how we look after it.",
-	},
-	{
-		id: "charter",
-		title: "Club charter",
-		blurb: "Our values, code of conduct, and what members can expect from the club and each other.",
-	},
-];
+const slug = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/^-|-$/g, "");
+const policies = (await getCollection("policies"))
+	.map((p) => p.data)
+	.sort((a, b) => a.order - b.order)
+	.map((p) => ({ ...p, anchor: p.anchor ?? slug(p.title) }));
 ---
 
 <Page
@@ -28,11 +16,11 @@ const policies: { id: string; title: string; blurb: string; href?: string }[] = 
 >
 	{
 		policies.map((p) => (
-			<section id={p.id}>
+			<section id={p.anchor}>
 				<h2>{p.title}</h2>
-				<p>{p.blurb}</p>
-				{p.href ? (
-					<a class="btn" href={p.href}>Read the policy</a>
+				<p>{p.summary}</p>
+				{p.document ? (
+					<a class="btn" href={p.document}>Read the policy</a>
 				) : (
 					<p class="muted">Full document coming soon.</p>
 				)}

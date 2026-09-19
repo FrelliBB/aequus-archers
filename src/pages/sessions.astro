@@ -1,22 +1,24 @@
 ---
 import Base from "../layouts/Base.astro";
 import { SITE_TITLE, BOOK_URL } from "../consts";
-import { TASTERS, COURSES, parseDate, fmt } from "../data/sessions";
+import { getCollection } from "astro:content";
+import { parseDate, fmt, startOfToday } from "../lib/dates";
 
-const buildToday = new Date();
-buildToday.setHours(0, 0, 0, 0);
+const buildToday = startOfToday();
 const isPast = (d: Date) => d.getTime() < buildToday.getTime();
 
-const tasters = TASTERS.map((t) => ({ ...t, d: parseDate(t.date) })).sort(
-	(a, b) => a.d.getTime() - b.d.getTime(),
-);
+const tasters = (await getCollection("tasters"))
+	.map(({ data: t }) => ({ ...t, d: parseDate(t.date) }))
+	.sort((a, b) => a.d.getTime() - b.d.getTime());
 
-const courses = COURSES.map((c) => {
+const courses = (await getCollection("courses")).map(({ data: c }) => {
 	const isoSorted = [...c.dates].sort();
 	return { ...c, ds: isoSorted.map(parseDate), startISO: isoSorted[0] };
 }).sort((a, b) => (a.startISO < b.startISO ? -1 : 1));
 
 const nextT = tasters.find((t) => !isPast(t.d));
+const nextC = courses.find((c) => !isPast(c.ds[0]));
+const season = (nextT?.d ?? nextC?.ds[0] ?? buildToday).getFullYear();
 function relTag(d: Date) {
 	const days = Math.round((d.getTime() - buildToday.getTime()) / 86400000);
 	if (days === 0) return "Today";
@@ -32,7 +34,7 @@ const pageDesc =
 
 <Base title={pageTitle} description={pageDesc}>
 	<div class="wrap sessions">
-		<p class="kicker">2026 season · now booking</p>
+		<p class="kicker">{season} season · now booking</p>
 		<h1>Upcoming sessions</h1>
 		<p class="lede">
 			Come and have a go. All equipment provided, total beginners welcome — just pick a date and
@@ -79,7 +81,8 @@ const pageDesc =
 							<div class="day">{fmt(t.d, { weekday: "long" })}</div>
 							<div class="date">{fmt(t.d, { day: "numeric", month: "short" })}</div>
 							<div class="time">{t.time}</div>
-							<div class="meta">{t.note ?? "1.5 hrs · kit provided"}</div>
+							<div class="meta">1.5 hrs · kit provided</div>
+							{t.note && <div class="tnote">{t.note}</div>}
 							<span class="soontag" hidden>
 								Next up
 							</span>
@@ -102,18 +105,16 @@ const pageDesc =
 			<h2>Beginner courses</h2><span class="price">£90 · £45 under-18</span>
 		</div>
 		<p class="groupsub">
-			Four weeks over consecutive weekends (3 hrs each). Learn the fundamentals, then earn your
-			certificate — required to join any Archery GB club, including ours.
+			Four 3-hour sessions, or two full days over one weekend. Learn the fundamentals, then earn
+			your certificate — required to join any Archery GB club, including ours.
 		</p>
 		<div class="course-grid">
 			{
 				courses.map((c) => (
 					<div class="ccard" data-start={c.startISO} hidden={isPast(c.ds[0])}>
-						<span class="ctag">{c.ds.length}-week course</span>
+						<span class="ctag">{c.ds.length === 2 ? "Weekend course" : `${c.ds.length} sessions`}</span>
 						<h3>{c.name}</h3>
-						<p class="sub">
-							{fmt(c.ds[0], { weekday: "long" })}s · {c.times}
-						</p>
+						<p class="sub">{c.times}</p>
 						<ul class="dates">
 							{c.ds.map((d, i) => (
 								<li>
@@ -122,6 +123,7 @@ const pageDesc =
 								</li>
 							))}
 						</ul>
+						{c.note && <p class="cnote">{c.note}</p>}
 						<p class="perks">Certificate on completion · all sessions required · kit provided</p>
 						<div class="priceline">
 							<span class="big">£90</span> <span class="small">/ £45 under-18</span>
@@ -396,6 +398,12 @@ const pageDesc =
 		font-size: 0.95rem;
 		color: var(--muted);
 	}
+	.tcard .tnote {
+		font-family: var(--font-display);
+		font-style: italic;
+		color: var(--coral-deep);
+		margin-top: 4px;
+	}
 	.tcard .soontag {
 		align-self: flex-start;
 		background: var(--coral-soft);
@@ -475,6 +483,13 @@ const pageDesc =
 		font-family: var(--font-display);
 		font-style: italic;
 		font-size: 0.95rem;
+	}
+	.cnote {
+		background: var(--butter-soft);
+		border-radius: var(--radius-s);
+		padding: 8px 12px;
+		font-size: 0.95rem;
+		margin: 0 0 14px;
 	}
 	.perks {
 		font-size: 0.95rem;
