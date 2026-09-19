@@ -40,6 +40,13 @@ content:
             label: Note
             type: string
             description: Optional. Shown on the card, for example "Evening session" or "Father's Day".
+          - name: booking
+            label: Booking link
+            type: string
+            description: Optional. The booking form for this session. Leave empty to use the club's general booking page.
+            pattern:
+              regex: "^(https://.+)?$"
+              message: Use a full web address starting with https://
 
   - name: courses
     label: Beginner courses
@@ -77,6 +84,13 @@ content:
             label: Note
             type: string
             description: Optional. Shown on the card, for example "A course over one weekend may not suit children under 13."
+          - name: booking
+            label: Booking link
+            type: string
+            description: Optional. The booking form for this course. Leave empty to use the club's general booking page.
+            pattern:
+              regex: "^(https://.+)?$"
+              message: Use a full web address starting with https://
 
   - name: events
     label: Club events

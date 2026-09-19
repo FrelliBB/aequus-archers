@@ -24,6 +24,12 @@ const isoDate = z
 	);
 
 const text = z.coerce.string().trim().min(1);
+const optionalUrl = z
+	.string()
+	.trim()
+	.optional()
+	.transform((v) => v || undefined)
+	.pipe(z.url({ message: "Use a full web address starting with https://" }).optional());
 const optionalText = z.string().trim().optional().transform((v) => v || undefined);
 
 const tasters = defineCollection({
@@ -33,6 +39,7 @@ const tasters = defineCollection({
 		date: isoDate,
 		time: text,
 		note: optionalText,
+		booking: optionalUrl,
 	}),
 });
 
@@ -44,6 +51,7 @@ const courses = defineCollection({
 		times: text,
 		dates: z.array(isoDate).min(1),
 		note: optionalText,
+		booking: optionalUrl,
 	}),
 });
 
@@ -56,7 +64,7 @@ const events = defineCollection({
 		time: optionalText,
 		location: optionalText,
 		description: optionalText,
-		link: z.url().optional(),
+		link: optionalUrl,
 	}),
 });
 

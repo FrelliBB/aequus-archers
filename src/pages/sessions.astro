@@ -62,7 +62,7 @@ const pageDesc =
 							1.5 hrs · £15 (£10 under-16)
 						</p>
 					</div>
-					<a class="btn btn--butter" href={BOOK_URL}>Reserve a place</a>
+					<a class="btn btn--butter" href={nextT.booking ?? BOOK_URL}>Reserve a place</a>
 				</div>
 			)
 		}
@@ -76,7 +76,7 @@ const pageDesc =
 		<div class="taster-grid">
 			{
 				tasters.map((t) => (
-					<div class="tcard" data-date={t.date} data-time={t.time} hidden={isPast(t.d)}>
+					<div class="tcard" data-date={t.date} data-time={t.time} data-booking={t.booking ?? BOOK_URL} hidden={isPast(t.d)}>
 						<div class="body">
 							<div class="day">{fmt(t.d, { weekday: "long" })}</div>
 							<div class="date">{fmt(t.d, { day: "numeric", month: "short" })}</div>
@@ -87,7 +87,7 @@ const pageDesc =
 								Next up
 							</span>
 							<div class="foot">
-								<a href={BOOK_URL}>
+								<a href={t.booking ?? BOOK_URL}>
 									Reserve <span class="arrow">→</span>
 								</a>
 							</div>
@@ -128,7 +128,7 @@ const pageDesc =
 						<div class="priceline">
 							<span class="big">£90</span> <span class="small">/ £45 under-18</span>
 						</div>
-						<a class="btn" href={BOOK_URL}>
+						<a class="btn" href={c.booking ?? BOOK_URL}>
 							Join the {c.name}
 						</a>
 					</div>
@@ -248,6 +248,7 @@ const pageDesc =
 					" · " +
 					time +
 					" · 1.5 hrs · £15 (£10 under-16)";
+				banner.querySelector<HTMLAnchorElement>(".btn")!.href = card.dataset.booking!;
 				banner.hidden = false;
 			}
 		} else {
