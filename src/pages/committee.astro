@@ -1,16 +1,16 @@
 ---
 import Page from "../layouts/Page.astro";
 
-// People who run the club. Add a person by filling in a name, a short bio,
-// and dropping a photo at the matching path in /public/images/team/.
-const coaches = [
+type Person = { role: string; photo: string; name?: string; bio?: string; level?: string };
+
+const coaches: Person[] = [
 	{ role: "Coach", level: "Archery GB qualified", photo: "/images/team/coach-1.jpg" },
 	{ role: "Coach", level: "Archery GB qualified", photo: "/images/team/coach-2.jpg" },
 	{ role: "Coach", level: "Archery GB qualified", photo: "/images/team/coach-3.jpg" },
 	{ role: "Session Leader", level: "Experienced archer", photo: "/images/team/session-leader.jpg" },
 ];
 
-const committee = [
+const committee: Person[] = [
 	{ role: "Chair", photo: "/images/team/chair.jpg" },
 	{ role: "Secretary", photo: "/images/team/secretary.jpg" },
 	{ role: "Treasurer", photo: "/images/team/treasurer.jpg" },
@@ -87,8 +87,8 @@ const committee = [
 					<div class="person">
 						<img class="photo" src={c.photo} alt={`${c.role} at Aequus Archers`} loading="lazy" />
 						<div class="role">{c.role}</div>
-						<div class="name">Name coming soon</div>
-						<div class="muted">{c.level}</div>
+						{c.name && <div class="name">{c.name}</div>}
+						<div class="muted">{c.bio ?? c.level}</div>
 					</div>
 				))
 			}
@@ -104,19 +104,11 @@ const committee = [
 					<div class="person">
 						<img class="photo" src={m.photo} alt={`${m.role} at Aequus Archers`} loading="lazy" />
 						<div class="role">{m.role}</div>
-						<div class="name">Name coming soon</div>
-						<div class="muted">A short bio will go here.</div>
+						{m.name && <div class="name">{m.name}</div>}
+						{m.bio && <div class="muted">{m.bio}</div>}
 					</div>
 				))
 			}
-		</div>
-	</section>
-
-	<section>
-		<div class="note">
-			To add or update someone, edit <code>src/pages/committee.astro</code> — replace “Name coming
-			soon” with their name and bio, and drop a photo at the matching path in
-			<code>public/images/team/</code> (keep the same filename and it appears automatically).
 		</div>
 	</section>
 

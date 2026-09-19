@@ -1,7 +1,7 @@
 ---
 import Page from "../layouts/Page.astro";
 
-const policies = [
+const policies: { id: string; title: string; blurb: string; href?: string }[] = [
 	{
 		id: "safeguarding",
 		title: "Safeguarding policy",
@@ -31,15 +31,12 @@ const policies = [
 			<section id={p.id}>
 				<h2>{p.title}</h2>
 				<p>{p.blurb}</p>
-				<a class="btn" href="#">Read the policy (coming soon)</a>
+				{p.href ? (
+					<a class="btn" href={p.href}>Read the policy</a>
+				) : (
+					<p class="muted">Full document coming soon.</p>
+				)}
 			</section>
 		))
 	}
-	<section>
-		<div class="note">
-			To publish a policy, drop the PDF into <code>public/policies/</code> and point the button's
-			<code>href</code> at it (e.g. <code>/policies/safeguarding.pdf</code>), or replace the button
-			with the policy text.
-		</div>
-	</section>
 </Page>

@@ -18,6 +18,9 @@ All run from the project root:
 
 - **Session dates** — `src/data/sessions.ts`. Add/remove tasters and courses here; past dates hide automatically and the "next session" banner updates. Adding new dates needs a rebuild/redeploy.
 - **Pages** — `src/pages/` (`index`, `sessions`, `about`, `faq`, `contact`, plus placeholders: `committee`, `coaches`, `policies`, `events`, `archery`).
+- **Team** — `src/pages/committee.astro`. Add `name` and `bio` to a person in the `coaches` / `committee` lists; the name line is hidden until set.
+- **Policies** — drop the PDF into `public/policies/` and set `href` on that policy in `src/pages/policies.astro` (e.g. `/policies/safeguarding.pdf`). Until then the page says the document is coming soon.
+- **Events** — `src/pages/events.astro`. Embed the Spond or Google calendar, or render events from a data file like the sessions page.
 - **Header / footer** — `src/components/Header.astro`, `src/components/Footer.astro`.
 - **Theme colours and fonts** — brand tokens are defined at the top of `src/styles/global.css` (`--pine`, `--coral`, `--butter`, `--paper`, etc.). Change them once and the whole site follows. Fonts are Fraunces (headings) and Figtree (body), self-hosted through Fontsource.
 - **Layouts** — `src/layouts/Base.astro` (head, header, footer) and `src/layouts/Page.astro` (standard content page with title and intro).
