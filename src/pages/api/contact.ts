@@ -1,13 +1,13 @@
 import type { APIContext } from "astro";
 import { EmailMessage } from "cloudflare:email";
+import { env } from "cloudflare:workers";
 import { createMimeMessage, Mailbox } from "mimetext";
 
 // Runs on-demand in the Worker (not prerendered).
 export const prerender = false;
 
-export async function POST({ request, locals, redirect }: APIContext) {
+export async function POST({ request, redirect }: APIContext) {
 	try {
-		const env = (locals as any).runtime.env;
 		const data = await request.formData();
 
 		// Honeypot: bots fill this hidden field. Pretend success and drop it.
@@ -22,7 +22,8 @@ export async function POST({ request, locals, redirect }: APIContext) {
 		// Log to D1 first (best-effort) so we keep a record even if the email send fails.
 		// If the DB binding isn't configured yet, this is skipped and the form still works.
 		try {
-			await env.DB?.prepare(
+			const db = (env as Env & { DB?: D1Database }).DB;
+			await db?.prepare(
 				"INSERT INTO contact_messages (name, email, message) VALUES (?, ?, ?)",
 			)
 				.bind(name, email, message)
@@ -31,8 +32,8 @@ export async function POST({ request, locals, redirect }: APIContext) {
 			console.error("Contact log (D1) failed:", logErr);
 		}
 
-		const from = env.CONTACT_FROM as string;
-		const to = env.CONTACT_TO as string;
+		const from: string = env.CONTACT_FROM;
+		const to: string = env.CONTACT_TO;
 
 		const msg = createMimeMessage();
 		msg.setSender({ name: "Aequus Archers website", addr: from });
