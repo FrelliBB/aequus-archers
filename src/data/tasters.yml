@@ -1,19 +1,20 @@
-- date: 2027-04-04
-  time: 11:00am
-- date: 2027-06-05
-  time: 11:00am
-- date: 2027-06-20
-  time: 10:00am
-  note: Father's Day
-- date: 2027-06-20
-  time: 12:00pm
-  note: Father's Day
-- date: 2027-07-21
-  time: 6:00pm
-  note: Evening session
-- date: 2027-08-30
-  time: 11:00am
-  note: Bank holiday
-- date: 2027-09-12
-  time: 11:00am
-  note: Last taster of the season
+tasters:
+  - date: 2027-04-04
+    time: 11:00am
+  - date: 2027-06-05
+    time: 11:00am
+  - date: 2027-06-20
+    time: 10:00am
+    note: Father's Day
+  - date: 2027-06-20
+    time: 12:00pm
+    note: Father's Day
+  - date: 2027-07-21
+    time: 6:00pm
+    note: Evening session
+  - date: 2027-08-30
+    time: 11:00am
+    note: Bank holiday
+  - date: 2027-09-12
+    time: 11:00am
+    note: Last taster of the season

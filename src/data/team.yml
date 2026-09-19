@@ -1,46 +1,47 @@
-- name: Clare Rutherford
-  role: Members & Coaches Secretary · Session Coach
-  group: committee
-  photo: team/clare-rutherford.jpg
-  bio: |-
-    I fell in love with archery fairly recently. It was around the summer of 2020, as the Covid lockdown started to ease, and I was looking for something I could do outdoors that was both mentally and physically stimulating. Being relatively new to the area and not knowing many people locally, I found archery was one of the first sports allowed to resume — albeit under social distancing restrictions.
+team:
+  - name: Clare Rutherford
+    role: Members & Coaches Secretary · Session Coach
+    group: committee
+    photo: team/clare-rutherford.jpg
+    bio: |-
+      I fell in love with archery fairly recently. It was around the summer of 2020, as the Covid lockdown started to ease, and I was looking for something I could do outdoors that was both mentally and physically stimulating. Being relatively new to the area and not knowing many people locally, I found archery was one of the first sports allowed to resume — albeit under social distancing restrictions.
 
-    So in August that year I joined a beginners’ course and haven’t looked back since. Archery got me through a very difficult time in my life and, while I know I won’t be the next Olympic gold medallist, I love the relaxation that shooting a bow brings and the thrill of hitting that elusive gold. It’s an activity where I can set my own goals and achieve them at my own pace.
+      So in August that year I joined a beginners’ course and haven’t looked back since. Archery got me through a very difficult time in my life and, while I know I won’t be the next Olympic gold medallist, I love the relaxation that shooting a bow brings and the thrill of hitting that elusive gold. It’s an activity where I can set my own goals and achieve them at my own pace.
 
-    The social aspect is important to me, and I soon realised the best way to meet people was volunteering to help out with the many club activities that run through the outdoor season. I particularly enjoy coaching our taster sessions and beginners’ courses — there’s something very satisfying about helping others develop and grow.
+      The social aspect is important to me, and I soon realised the best way to meet people was volunteering to help out with the many club activities that run through the outdoor season. I particularly enjoy coaching our taster sessions and beginners’ courses — there’s something very satisfying about helping others develop and grow.
 
-    My role on the committee is focused on the activities involving our coaches, like taster sessions and beginners’ courses. Part of my remit is making sure our coaches have all the documentation they need, and that everyone who comes through a session or joins as a new member has what they need to feel welcome, happy and valued. I also keep a record of all our equipment.
-- role: Coach
-  group: coach
-  summary: Archery GB qualified
-  photo: team/coach-1.jpg
-- role: Coach
-  group: coach
-  summary: Archery GB qualified
-  photo: team/coach-2.jpg
-- role: Coach
-  group: coach
-  summary: Archery GB qualified
-  photo: team/coach-3.jpg
-- role: Session Leader
-  group: coach
-  summary: Experienced archer
-  photo: team/session-leader.jpg
-- role: Chair
-  group: committee
-  photo: team/chair.jpg
-- role: Secretary
-  group: committee
-  photo: team/secretary.jpg
-- role: Treasurer
-  group: committee
-  photo: team/treasurer.jpg
-- role: Records Officer
-  group: committee
-  photo: team/records-officer.jpg
-- role: Safeguarding Officer
-  group: committee
-  photo: team/safeguarding-officer.jpg
-- role: Membership Secretary
-  group: committee
-  photo: team/membership-secretary.jpg
+      My role on the committee is focused on the activities involving our coaches, like taster sessions and beginners’ courses. Part of my remit is making sure our coaches have all the documentation they need, and that everyone who comes through a session or joins as a new member has what they need to feel welcome, happy and valued. I also keep a record of all our equipment.
+  - role: Coach
+    group: coach
+    summary: Archery GB qualified
+    photo: team/coach-1.jpg
+  - role: Coach
+    group: coach
+    summary: Archery GB qualified
+    photo: team/coach-2.jpg
+  - role: Coach
+    group: coach
+    summary: Archery GB qualified
+    photo: team/coach-3.jpg
+  - role: Session Leader
+    group: coach
+    summary: Experienced archer
+    photo: team/session-leader.jpg
+  - role: Chair
+    group: committee
+    photo: team/chair.jpg
+  - role: Secretary
+    group: committee
+    photo: team/secretary.jpg
+  - role: Treasurer
+    group: committee
+    photo: team/treasurer.jpg
+  - role: Records Officer
+    group: committee
+    photo: team/records-officer.jpg
+  - role: Safeguarding Officer
+    group: committee
+    photo: team/safeguarding-officer.jpg
+  - role: Membership Secretary
+    group: committee
+    photo: team/membership-secretary.jpg

@@ -3,14 +3,13 @@ import { file } from "astro/loaders";
 import { z } from "astro/zod";
 import yaml from "js-yaml";
 
-const list = (path: string) =>
-	file(path, {
-		parser: (text) =>
-			((yaml.load(text, { schema: yaml.CORE_SCHEMA }) as Record<string, unknown>[] | null) ?? []).map((item, i) => ({
-				...item,
-				id: String(i),
-				order: i,
-			})),
+const list = (name: string) =>
+	file(`src/data/${name}.yml`, {
+		parser: (text) => {
+			const data = yaml.load(text, { schema: yaml.CORE_SCHEMA }) as Record<string, unknown> | null;
+			const items = (data?.[name] ?? []) as Record<string, unknown>[];
+			return items.map((item, i) => ({ ...item, id: String(i), order: i }));
+		},
 	});
 
 const isoDate = z
@@ -28,7 +27,7 @@ const text = z.coerce.string().trim().min(1);
 const optionalText = z.string().trim().optional().transform((v) => v || undefined);
 
 const tasters = defineCollection({
-	loader: list("src/data/tasters.yml"),
+	loader: list("tasters"),
 	schema: z.object({
 		order: z.number(),
 		date: isoDate,
@@ -38,7 +37,7 @@ const tasters = defineCollection({
 });
 
 const courses = defineCollection({
-	loader: list("src/data/courses.yml"),
+	loader: list("courses"),
 	schema: z.object({
 		order: z.number(),
 		name: text,
@@ -49,7 +48,7 @@ const courses = defineCollection({
 });
 
 const events = defineCollection({
-	loader: list("src/data/events.yml"),
+	loader: list("events"),
 	schema: z.object({
 		order: z.number(),
 		title: text,
@@ -62,7 +61,7 @@ const events = defineCollection({
 });
 
 const team = defineCollection({
-	loader: list("src/data/team.yml"),
+	loader: list("team"),
 	schema: z.object({
 		order: z.number(),
 		name: optionalText,
@@ -75,7 +74,7 @@ const team = defineCollection({
 });
 
 const policies = defineCollection({
-	loader: list("src/data/policies.yml"),
+	loader: list("policies"),
 	schema: z.object({
 		order: z.number(),
 		anchor: optionalText,

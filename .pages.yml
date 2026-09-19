@@ -16,152 +16,187 @@ content:
     type: file
     path: src/data/tasters.yml
     format: yaml
-    list: true
     fields:
-      - name: date
-        label: Date
-        type: date
-        required: true
-        options:
-          format: yyyy-MM-dd
-      - name: time
-        label: Start time
-        type: string
-        required: true
-        description: For example 10:00am
-      - name: note
-        label: Note
-        type: string
-        description: Optional. Shown on the card, for example "Evening session" or "Father's Day".
+      - name: tasters
+        label: Sessions
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{date} at {time}"
+        fields:
+          - name: date
+            label: Date
+            type: date
+            required: true
+            options:
+              format: yyyy-MM-dd
+          - name: time
+            label: Start time
+            type: string
+            required: true
+            description: For example 10:00am
+          - name: note
+            label: Note
+            type: string
+            description: Optional. Shown on the card, for example "Evening session" or "Father's Day".
 
   - name: courses
     label: Beginner courses
     type: file
     path: src/data/courses.yml
     format: yaml
-    list: true
     fields:
-      - name: name
-        label: Course name
-        type: string
-        required: true
-        description: For example "May course"
-      - name: times
-        label: Times
-        type: string
-        required: true
-        description: For example 10am–1pm
-      - name: dates
-        label: Session dates
-        type: date
-        required: true
+      - name: courses
+        label: Courses
+        type: object
         list:
-          min: 1
-        options:
-          format: yyyy-MM-dd
-      - name: note
-        label: Note
-        type: string
-        description: Optional. Shown on the card, for example "A course over one weekend may not suit children under 13."
+          collapsible:
+            collapsed: true
+            summary: "{name}"
+        fields:
+          - name: name
+            label: Course name
+            type: string
+            required: true
+            description: For example "May course"
+          - name: times
+            label: Times
+            type: string
+            required: true
+            description: For example 10am–1pm
+          - name: dates
+            label: Session dates
+            type: date
+            required: true
+            list:
+              min: 1
+            options:
+              format: yyyy-MM-dd
+          - name: note
+            label: Note
+            type: string
+            description: Optional. Shown on the card, for example "A course over one weekend may not suit children under 13."
 
   - name: events
     label: Club events
     type: file
     path: src/data/events.yml
     format: yaml
-    list: true
     fields:
-      - name: title
-        label: Title
-        type: string
-        required: true
-      - name: date
-        label: Date
-        type: date
-        required: true
-        options:
-          format: yyyy-MM-dd
-      - name: time
-        label: Time
-        type: string
-        description: Optional. For example 10am–4pm
-      - name: location
-        label: Location
-        type: string
-        description: Optional. Leave empty for events at the club field.
-      - name: description
-        label: Description
-        type: text
-      - name: link
-        label: Link
-        type: string
-        description: Optional. A full web address for more details or booking, starting with https://
-        pattern:
-          regex: "^(https://.+)?$"
-          message: Use a full web address starting with https://
+      - name: events
+        label: Events
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{date}: {title}"
+        fields:
+          - name: title
+            label: Title
+            type: string
+            required: true
+          - name: date
+            label: Date
+            type: date
+            required: true
+            options:
+              format: yyyy-MM-dd
+          - name: time
+            label: Time
+            type: string
+            description: Optional. For example 10am–4pm
+          - name: location
+            label: Location
+            type: string
+            description: Optional. Leave empty for events at the club field.
+          - name: description
+            label: Description
+            type: text
+          - name: link
+            label: Link
+            type: string
+            description: Optional. A full web address for more details or booking, starting with https://
+            pattern:
+              regex: "^(https://.+)?$"
+              message: Use a full web address starting with https://
 
   - name: team
     label: Team
     type: file
     path: src/data/team.yml
     format: yaml
-    list: true
     fields:
-      - name: name
-        label: Name
-        type: string
-        description: Leave empty until the person is happy to be named.
-      - name: role
-        label: Role
-        type: string
-        required: true
-      - name: group
-        label: Shown under
-        type: select
-        required: true
-        options:
-          values:
-            - name: committee
-              label: Committee
-            - name: coach
-              label: Coaches
-      - name: photo
-        label: Photo
-        type: image
-        options:
-          media: images
-          path: team
-      - name: summary
-        label: Short line
-        type: string
-        description: Optional. Shown under the name, for example "Archery GB qualified".
-      - name: bio
-        label: Full profile
-        type: text
-        description: Optional. A person with a full profile is shown at the top of the page. Leave a blank line between paragraphs.
+      - name: team
+        label: People
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{name} ({role})"
+        fields:
+          - name: name
+            label: Name
+            type: string
+            description: Leave empty until the person is happy to be named.
+          - name: role
+            label: Role
+            type: string
+            required: true
+          - name: group
+            label: Shown under
+            type: select
+            required: true
+            options:
+              values:
+                - name: committee
+                  label: Committee
+                - name: coach
+                  label: Coaches
+          - name: photo
+            label: Photo
+            type: image
+            options:
+              media: images
+              path: team
+          - name: summary
+            label: Short line
+            type: string
+            description: Optional. Shown under the name, for example "Archery GB qualified".
+          - name: bio
+            label: Full profile
+            type: text
+            description: Optional. A person with a full profile is shown at the top of the page. Leave a blank line between paragraphs.
 
   - name: policies
     label: Policies
     type: file
     path: src/data/policies.yml
     format: yaml
-    list: true
     fields:
-      - name: anchor
-        label: Link name
-        type: string
-        readonly: true
-        description: Set by the website for existing policies. New policies get one from the title.
-      - name: title
-        label: Title
-        type: string
-        required: true
-      - name: summary
-        label: Summary
-        type: text
-        required: true
-      - name: document
-        label: Document (PDF)
-        type: file
-        options:
-          media: documents
+      - name: policies
+        label: Policies
+        type: object
+        list:
+          collapsible:
+            collapsed: true
+            summary: "{title}"
+        fields:
+          - name: anchor
+            label: Link name
+            type: string
+            readonly: true
+            description: Set by the website for existing policies. New policies get one from the title.
+          - name: title
+            label: Title
+            type: string
+            required: true
+          - name: summary
+            label: Summary
+            type: text
+            required: true
+          - name: document
+            label: Document (PDF)
+            type: file
+            options:
+              media: documents
