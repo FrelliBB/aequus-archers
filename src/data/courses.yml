@@ -1,0 +1,40 @@
+- name: March weekend course
+  times: 9:30am–4:30pm
+  dates:
+    - 2027-03-27
+    - 2027-03-28
+  note: A course over one weekend may not suit children under 13.
+- name: April course
+  times: 2pm–5pm
+  dates:
+    - 2027-04-11
+    - 2027-04-18
+    - 2027-04-25
+    - 2027-05-02
+- name: June course
+  times: 10am–1pm
+  dates:
+    - 2027-06-12
+    - 2027-06-13
+    - 2027-06-19
+    - 2027-06-20
+- name: July weekend course
+  times: 9:30am–4pm
+  dates:
+    - 2027-07-24
+    - 2027-07-25
+  note: A course over one weekend may not suit children under 13.
+- name: August course
+  times: 10am–1pm
+  dates:
+    - 2027-08-07
+    - 2027-08-08
+    - 2027-08-14
+    - 2027-08-15
+- name: Late summer course
+  times: 10:30am–1:30pm
+  dates:
+    - 2027-08-29
+    - 2027-09-05
+    - 2027-09-12
+    - 2027-09-19

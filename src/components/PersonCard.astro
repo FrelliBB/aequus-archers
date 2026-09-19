@@ -1,0 +1,39 @@
+---
+import { Image } from "astro:assets";
+import { photo } from "../lib/images";
+
+interface Props {
+	role: string;
+	name?: string;
+	summary?: string;
+	photo?: string;
+}
+
+const { role, name, summary, photo: src } = Astro.props;
+const alt = name ? `${name}, ${role}` : `${role} at Aequus Archers`;
+---
+
+<div class="person">
+	{src && <Image class="photo" src={photo(src)} alt={alt} widths={[300, 600]} sizes="260px" />}
+	<div class="role">{role}</div>
+	{name && <div class="name">{name}</div>}
+	{summary && <div class="muted">{summary}</div>}
+</div>
+
+<style>
+	.photo {
+		aspect-ratio: 1 / 1;
+	}
+	.role {
+		font-family: var(--font-display);
+		font-style: italic;
+		color: var(--coral-deep);
+		margin-top: 14px;
+	}
+	.name {
+		font-weight: 700;
+	}
+	.muted {
+		font-size: 0.95rem;
+	}
+</style>

@@ -1,25 +1,16 @@
 ---
 import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
 import Page from "../layouts/Page.astro";
+import PersonCard from "../components/PersonCard.astro";
 import { photo } from "../lib/images";
 
-type Person = { role: string; photo: string; name?: string; bio?: string; level?: string };
-
-const coaches: Person[] = [
-	{ role: "Coach", level: "Archery GB qualified", photo: "team/coach-1.jpg" },
-	{ role: "Coach", level: "Archery GB qualified", photo: "team/coach-2.jpg" },
-	{ role: "Coach", level: "Archery GB qualified", photo: "team/coach-3.jpg" },
-	{ role: "Session Leader", level: "Experienced archer", photo: "team/session-leader.jpg" },
-];
-
-const committee: Person[] = [
-	{ role: "Chair", photo: "team/chair.jpg" },
-	{ role: "Secretary", photo: "team/secretary.jpg" },
-	{ role: "Treasurer", photo: "team/treasurer.jpg" },
-	{ role: "Records Officer", photo: "team/records-officer.jpg" },
-	{ role: "Safeguarding Officer", photo: "team/safeguarding-officer.jpg" },
-	{ role: "Membership Secretary", photo: "team/membership-secretary.jpg" },
-];
+const people = (await getCollection("team")).map((p) => p.data).sort((a, b) => a.order - b.order);
+const profiles = people.filter((p) => p.bio);
+const coaches = people.filter((p) => !p.bio && p.group === "coach");
+const committee = people.filter((p) => !p.bio && p.group === "committee");
+const alt = (p: { name?: string; role: string }) =>
+	p.name ? `${p.name}, ${p.role}` : `${p.role} at Aequus Archers`;
 ---
 
 <Page
@@ -27,7 +18,7 @@ const committee: Person[] = [
 	description="Meet the friendly volunteer committee and qualified coaching team who run Aequus Archers."
 	intro="We’re a volunteer-run club, and it’s our people who make it so welcoming — meet the coaches who’ll get you started and the committee who keep things running."
 >
-	<section class="has-figure">
+	<section>
 		<h2>Our committee &amp; coaches</h2>
 		<p>
 			Everything at Aequus Archers is run by volunteers who give their time because they love the
@@ -35,83 +26,49 @@ const committee: Person[] = [
 			a member, these are some of the friendly faces you’ll meet.
 		</p>
 
-		<article class="profile">
-			<Image
-				class="profile-photo"
-				src={photo("team/clare-rutherford.jpg")}
-				alt="Clare Rutherford, Members &amp; Coaches Secretary and Session Coach"
-				widths={[260, 480]}
-				sizes="260px"
-			/>
-			<div class="profile-body">
-				<div class="role">Members &amp; Coaches Secretary · Session Coach</div>
-				<h3 class="name">Clare Rutherford</h3>
-				<p>
-					I fell in love with archery fairly recently. It was around the summer of 2020, as the
-					Covid lockdown started to ease, and I was looking for something I could do outdoors that
-					was both mentally and physically stimulating. Being relatively new to the area and not
-					knowing many people locally, I found archery was one of the first sports allowed to resume
-					— albeit under social distancing restrictions.
-				</p>
-				<p>
-					So in August that year I joined a beginners’ course and haven’t looked back since. Archery
-					got me through a very difficult time in my life and, while I know I won’t be the next
-					Olympic gold medallist, I love the relaxation that shooting a bow brings and the thrill of
-					hitting that elusive gold. It’s an activity where I can set my own goals and achieve them
-					at my own pace.
-				</p>
-				<p>
-					The social aspect is important to me, and I soon realised the best way to meet people was
-					volunteering to help out with the many club activities that run through the outdoor season.
-					I particularly enjoy coaching our taster sessions and beginners’ courses — there’s
-					something very satisfying about helping others develop and grow.
-				</p>
-				<p>
-					My role on the committee is focused on the activities involving our coaches, like taster
-					sessions and beginners’ courses. Part of my remit is making sure our coaches have all the
-					documentation they need, and that everyone who comes through a session or joins as a new
-					member has what they need to feel welcome, happy and valued. I also keep a record of all
-					our equipment.
-				</p>
-			</div>
-		</article>
+		{
+			profiles.map((p) => (
+				<article class="profile">
+					{p.photo && (
+						<Image class="profile-photo" src={photo(p.photo)} alt={alt(p)} widths={[260, 480]} sizes="260px" />
+					)}
+					<div class="profile-body">
+						<div class="role">{p.role}</div>
+						<h3 class="name">{p.name}</h3>
+						{p.bio!.split(/\n\s*\n/).map((para) => <p>{para}</p>)}
+					</div>
+				</article>
+			))
+		}
 	</section>
 
-	<section>
-		<h2>Our coaches</h2>
-		<p class="muted">
-			Every session is led by an experienced, Archery GB–qualified coach. More profiles coming soon.
-		</p>
-		<div class="card-grid">
-			{
-				coaches.map((c) => (
-					<div class="person">
-						<Image class="photo" src={photo(c.photo)} alt={`${c.role} at Aequus Archers`} widths={[300, 600]} sizes="260px" />
-						<div class="role">{c.role}</div>
-						{c.name && <div class="name">{c.name}</div>}
-						<div class="muted">{c.bio ?? c.level}</div>
-					</div>
-				))
-			}
-		</div>
-	</section>
+	{
+		coaches.length > 0 && (
+			<section>
+				<h2>Our coaches</h2>
+				<p class="muted">Every session is led by an experienced, Archery GB–qualified coach.</p>
+				<div class="card-grid">
+					{coaches.map((p) => (
+						<PersonCard role={p.role} name={p.name} summary={p.summary} photo={p.photo} />
+					))}
+				</div>
+			</section>
+		)
+	}
 
-	<section>
-		<h2>Our committee</h2>
-		<p class="muted">The volunteers who keep the club running. More profiles coming soon.</p>
-		<div class="card-grid">
-			{
-				committee.map((m) => (
-					<div class="person">
-						<Image class="photo" src={photo(m.photo)} alt={`${m.role} at Aequus Archers`} widths={[300, 600]} sizes="260px" />
-						<div class="role">{m.role}</div>
-						{m.name && <div class="name">{m.name}</div>}
-						{m.bio && <div class="muted">{m.bio}</div>}
-					</div>
-				))
-			}
-		</div>
-	</section>
+	{
+		committee.length > 0 && (
+			<section>
+				<h2>Our committee</h2>
+				<p class="muted">The volunteers who keep the club running.</p>
+				<div class="card-grid">
+					{committee.map((p) => (
+						<PersonCard role={p.role} name={p.name} summary={p.summary} photo={p.photo} />
+					))}
+				</div>
+			</section>
+		)
+	}
 
 	<style>
 		.profile {
@@ -123,6 +80,9 @@ const committee: Person[] = [
 			background: var(--card);
 			border-radius: var(--radius-l);
 			padding: 32px;
+		}
+		.profile + .profile {
+			margin-top: 24px;
 		}
 		.profile-photo {
 			width: 100%;
@@ -144,25 +104,16 @@ const committee: Person[] = [
 		.profile-body p {
 			max-width: 62ch;
 		}
-		.person .photo {
-			aspect-ratio: 1 / 1;
-		}
-		.person .role {
-			margin-top: 14px;
-		}
-		.person .name {
-			font-weight: 700;
-		}
-		.person .muted {
-			font-size: 0.95rem;
-		}
 		@media (max-width: 640px) {
 			.profile {
 				grid-template-columns: 1fr;
 				gap: 24px;
 				padding: 24px 20px;
 			}
-			.profile-photo {
+			.profile + .profile {
+			margin-top: 24px;
+		}
+		.profile-photo {
 				max-width: 240px;
 			}
 		}

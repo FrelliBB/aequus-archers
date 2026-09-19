@@ -1,13 +1,14 @@
 ---
 import Base from "../layouts/Base.astro";
 import { SITE_TITLE, SITE_DESCRIPTION } from "../consts";
-import { TASTERS, parseDate, fmt } from "../data/sessions";
+import { getCollection } from "astro:content";
+import { parseDate, fmt, startOfToday } from "../lib/dates";
 import { Image } from "astro:assets";
 import { photo } from "../lib/images";
 
-const today = new Date();
-today.setHours(0, 0, 0, 0);
-const next = TASTERS.map((t) => ({ ...t, d: parseDate(t.date) }))
+const today = startOfToday();
+const next = (await getCollection("tasters"))
+	.map(({ data: t }) => ({ ...t, d: parseDate(t.date) }))
 	.filter((t) => t.d >= today)
 	.sort((a, b) => a.d.getTime() - b.d.getTime())[0];
 ---
@@ -98,7 +99,7 @@ const next = TASTERS.map((t) => ({ ...t, d: parseDate(t.date) }))
 					<span class="num">2</span>
 					<h3>Beginner’s course</h3>
 					<p>
-						Four weekend sessions to learn the basics and earn the Archery GB certificate you need
+						Four sessions or one full weekend to learn the basics and earn the Archery GB certificate you need
 						to join a club.
 					</p>
 					<p class="price">£90 · £45 under-18</p>

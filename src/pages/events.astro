@@ -1,18 +1,133 @@
 ---
+import { getCollection } from "astro:content";
 import Page from "../layouts/Page.astro";
+import { parseDate, fmt, startOfToday } from "../lib/dates";
+
+const today = startOfToday();
+const events = (await getCollection("events"))
+	.map(({ data: e }) => ({ ...e, d: parseDate(e.date) }))
+	.sort((a, b) => a.d.getTime() - b.d.getTime());
+const upcoming = events.filter((e) => e.d >= today);
 ---
 
 <Page
 	title="Events calendar"
-	description="Upcoming sessions, shoots and club events at Aequus Archers."
-	intro="Club shoots, social events and session dates — all in one place. Calendar coming soon."
+	description="Upcoming shoots, competitions and club events at Aequus Archers."
+	intro="Club shoots, competitions, work parties and socials. For tasters and beginner courses, see the sessions page."
 >
 	<section>
-		<h2>What you’ll find here</h2>
-		<p>
-			Once it’s live, this page will list upcoming club shoots, competitions, work parties and
-			social events, alongside taster and beginner-course dates.
-		</p>
+		<ol class="events">
+			{
+				events.map((e) => (
+					<li class="event" data-date={e.date} hidden={e.d < today}>
+						<div class="cal">
+							<span class="d">{e.d.getDate()}</span>
+							<span class="m">{fmt(e.d, { month: "short" })}</span>
+						</div>
+						<div class="body">
+							<h2>{e.title}</h2>
+							<p class="when">
+								{fmt(e.d, { weekday: "long", day: "numeric", month: "long", year: "numeric" })}
+								{e.time && <> · {e.time}</>}
+								{e.location && <> · {e.location}</>}
+							</p>
+							{e.description && <p>{e.description}</p>}
+							{e.link && (
+								<a class="textlink" href={e.link} target="_blank" rel="noopener">
+									More details
+								</a>
+							)}
+						</div>
+					</li>
+				))
+			}
+		</ol>
+		<div class="note empty" id="events-empty" hidden={upcoming.length > 0}>
+			No club events are listed right now. Check back soon, or follow us on social media for news.
+		</div>
+	</section>
+
+	<section class="outro">
+		<h2>New to archery?</h2>
+		<p>Start with a taster session or a beginner’s course. All kit is provided.</p>
 		<a class="btn" href="/sessions">See upcoming sessions</a>
 	</section>
+
+	<script>
+		const today = new Date();
+		today.setHours(0, 0, 0, 0);
+		let any = false;
+		document.querySelectorAll<HTMLElement>(".event[data-date]").forEach((el) => {
+			const past = new Date(el.dataset.date + "T00:00:00") < today;
+			el.hidden = past;
+			any ||= !past;
+		});
+		const empty = document.getElementById("events-empty");
+		if (empty) empty.hidden = any;
+	</script>
+
+	<style>
+		[hidden] {
+			display: none !important;
+		}
+		.events {
+			list-style: none;
+			padding: 0;
+			margin: 0;
+			display: flex;
+			flex-direction: column;
+			gap: 16px;
+			max-width: 780px;
+		}
+		.event {
+			display: flex;
+			gap: 24px;
+			align-items: flex-start;
+			background: var(--card);
+			border-radius: var(--radius);
+			padding: 22px 24px;
+		}
+		.cal {
+			flex: 0 0 auto;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			min-width: 72px;
+			padding: 10px 12px;
+			border-radius: var(--radius);
+			background: var(--butter);
+		}
+		.cal .d {
+			font-family: var(--font-display);
+			font-size: 1.9rem;
+			font-weight: 600;
+			line-height: 1;
+		}
+		.cal .m {
+			font-weight: 700;
+			font-size: 0.95rem;
+			margin-top: 4px;
+		}
+		.event h2 {
+			font-size: 1.4rem;
+			margin: 0 0 4px;
+		}
+		.when {
+			font-weight: 600;
+			color: var(--muted);
+			margin: 0 0 10px;
+		}
+		.event p:last-child {
+			margin-bottom: 0;
+		}
+		.empty {
+			max-width: 60ch;
+		}
+		@media (max-width: 520px) {
+			.event {
+				flex-direction: column;
+				gap: 14px;
+			}
+		}
+	</style>
 </Page>
