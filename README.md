@@ -19,7 +19,8 @@ All run from the project root:
 - **Session dates** — `src/data/sessions.ts`. Add/remove tasters and courses here; past dates hide automatically and the "next session" banner updates. Adding new dates needs a rebuild/redeploy.
 - **Pages** — `src/pages/` (`index`, `sessions`, `about`, `faq`, `contact`, plus placeholders: `committee`, `coaches`, `policies`, `events`, `archery`).
 - **Header / footer** — `src/components/Header.astro`, `src/components/Footer.astro`.
-- **Theme colours** — brand tokens live in `src/styles/global.css` (`--aeq-primary`, `--aeq-accent`, etc.). Change them once and the whole site follows.
+- **Theme colours and fonts** — brand tokens are defined at the top of `src/styles/global.css` (`--pine`, `--coral`, `--butter`, `--paper`, etc.). Change them once and the whole site follows. Fonts are Fraunces (headings) and Figtree (body), self-hosted through Fontsource.
+- **Layouts** — `src/layouts/Base.astro` (head, header, footer) and `src/layouts/Page.astro` (standard content page with title and intro).
 - **Images** — `public/images/` (`logo.png`, `hero.jpg`).
 
 ## TODO (needs club input)

@@ -9,6 +9,10 @@ Outstanding items for the new site. The site auto-deploys from GitHub via Cloudf
 - [ ] **Custom domain** — point Porkbun's nameservers at Cloudflare, then add `aequusarchers.co.uk` to the deployed Worker.
 - [ ] **Field location** — add the exact address / parking / a map to the About page (`src/pages/about.astro`, `#location` section).
 
+## Photos
+
+- [ ] **Replace placeholder photos** — drop real photos into `public/images/community/` and `public/images/team/` with the same filenames. The homepage uses `taster-smiles.jpg` and `club-day.jpg`.
+
 ## Page content to write (currently placeholders)
 
 - [ ] **Committee** — names, roles, short bios (`src/pages/committee.astro`).
@@ -20,6 +24,6 @@ Outstanding items for the new site. The site auto-deploys from GitHub via Cloudf
 
 - Homepage, Try archery / sessions (self-cleaning dates), About, FAQ, Contact, Thank-you, 404.
 - Archery info page with real handicaps / classifications / badges content.
-- Brand palette (red-led, cream, charcoal; blue accent), responsive nav, branded footer, favicon, local logo/hero images.
+- "Meadow" brand palette (pine, coral, butter, paper) with Fraunces + Figtree fonts, responsive nav, branded footer, favicon, local logo/hero images.
 - Cloudflare-native contact form (email send + best-effort D1 logging, opt-in).
 - Astro blog starter and placeholder assets removed.

@@ -123,70 +123,54 @@ const committee = [
 	<style>
 		.profile {
 			display: grid;
-			grid-template-columns: 240px 1fr;
-			gap: 30px;
+			grid-template-columns: 260px 1fr;
+			gap: 40px;
 			align-items: start;
-			margin-top: 18px;
+			margin-top: 28px;
+			background: var(--card);
+			border-radius: var(--radius-l);
+			padding: 32px;
 		}
 		.profile-photo {
 			width: 100%;
 			aspect-ratio: 3 / 4;
 			object-fit: cover;
-			border-radius: var(--aeq-radius);
-			background: var(--aeq-tile);
+			border-radius: var(--radius-photo);
+			box-shadow: 12px 12px 0 var(--butter);
+			background: var(--paper-deep);
 		}
-		.profile-body .role {
-			font-size: 0.875rem;
-			text-transform: uppercase;
-			letter-spacing: 0.05em;
-			color: var(--aeq-primary);
-			font-weight: 700;
+		.role {
+			font-family: var(--font-display);
+			font-style: italic;
+			color: var(--coral-deep);
 		}
 		.profile-body .name {
-			font-size: 1.625rem;
-			font-weight: 700;
-			color: var(--aeq-primary-dark);
-			margin: 4px 0 12px;
+			font-size: 2rem;
+			margin: 2px 0 14px;
 		}
 		.profile-body p {
-			font-size: 1.0625rem;
-			margin: 0 0 12px;
 			max-width: 62ch;
 		}
 		.person .photo {
-			width: 100%;
 			aspect-ratio: 1 / 1;
-			object-fit: cover;
-			display: block;
-			border-radius: var(--aeq-radius);
-			background: var(--aeq-tile);
 		}
 		.person .role {
-			font-size: 0.875rem;
-			text-transform: uppercase;
-			letter-spacing: 0.05em;
-			color: var(--aeq-primary);
-			font-weight: 700;
-			margin-top: 12px;
+			margin-top: 14px;
 		}
 		.person .name {
-			font-size: 1.0625rem;
 			font-weight: 700;
-			color: var(--aeq-ink);
-			margin-top: 2px;
 		}
 		.person .muted {
-			font-size: 1rem;
-			color: var(--aeq-muted);
-			margin-top: 2px;
+			font-size: 0.95rem;
 		}
-		@media (max-width: 560px) {
+		@media (max-width: 640px) {
 			.profile {
 				grid-template-columns: 1fr;
-				gap: 16px;
+				gap: 24px;
+				padding: 24px 20px;
 			}
 			.profile-photo {
-				max-width: 220px;
+				max-width: 240px;
 			}
 		}
 	</style>

@@ -7,14 +7,14 @@ import Page from "../layouts/Page.astro";
 	description="Sorry, we couldn't find that page."
 	intro="Sorry — that arrow missed the target. The page you're looking for doesn't exist."
 >
-	<section style="text-align:center;">
-		<p style="margin-left:auto;margin-right:auto;">
+	<section class="outro">
+		<p>
 			Try one of these instead:
 		</p>
-		<div style="display:flex;gap:12px;flex-wrap:wrap;justify-content:center;">
+		<div class="actions">
 			<a class="btn" href="/">Home</a>
-			<a class="btn" href="/sessions">Upcoming sessions</a>
-			<a class="btn" href="/contact">Contact us</a>
+			<a class="btn btn--ghost" href="/sessions">Upcoming sessions</a>
+			<a class="btn btn--ghost" href="/contact">Contact us</a>
 		</div>
 	</section>
 </Page>

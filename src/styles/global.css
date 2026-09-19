@@ -1,8 +1,43 @@
-/*
-  The CSS in this style tag is based off of Bear Blog's default CSS.
-  https://github.com/HermanMartinus/bearblog/blob/297026a877bc2ab2b3bdfbd6b9f7961c350917dd/templates/styles/blog/default.css
-  License MIT: https://github.com/HermanMartinus/bearblog/blob/master/LICENSE.md
- */
+@import "@fontsource-variable/fraunces/full.css";
+@import "@fontsource-variable/fraunces/full-italic.css";
+@import "@fontsource-variable/figtree";
+
+/* ---- Brand tokens: "Meadow" ----
+   Change a value here and the whole site follows. */
+:root {
+	--pine: #1f3b30;
+	--pine-mid: #2e5a47;
+	--pine-soft: #dce7dd;
+	--sage: #8db39a;
+
+	--coral: #e8573f;
+	--coral-strong: #c8412a;
+	--coral-deep: #b23a25;
+	--coral-soft: #fbe3dc;
+
+	--butter: #f3d27a;
+	--butter-soft: #faedc6;
+
+	--sky: #1f93c7;
+
+	--paper: #f5f1e6;
+	--paper-deep: #ece5d3;
+	--card: #fffdf8;
+
+	--ink: var(--pine);
+	--muted: #56655c;
+	--line: #ddd4bf;
+
+	--radius-s: 10px;
+	--radius: 18px;
+	--radius-l: 32px;
+	--radius-photo: 28px 28px 28px 8px;
+
+	--font-body: "Figtree Variable", system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+	--font-display: "Fraunces Variable", Georgia, "Times New Roman", serif;
+
+	--wrap: 1080px;
+}
 
 *,
 *::before,
@@ -10,168 +45,237 @@
 	box-sizing: border-box;
 }
 
-:root {
-	--accent: #d4271a;
-	--accent-dark: #a31a0f;
-	--black: 15, 18, 25;
-	--gray: 96, 115, 159;
-	--gray-light: 229, 233, 240;
-	--gray-dark: 34, 41, 57;
-	--gray-gradient: rgba(var(--gray-light), 50%), #fff;
-	--box-shadow:
-		0 2px 6px rgba(var(--gray), 25%), 0 8px 24px rgba(var(--gray), 33%),
-		0 16px 32px rgba(var(--gray), 33%);
+html {
+	-webkit-text-size-adjust: 100%;
 }
+
 body {
-	font-family: var(--aeq-font);
 	margin: 0;
-	padding: 0;
-	text-align: left;
-	background: var(--aeq-cream);
-	word-wrap: break-word;
-	overflow-wrap: break-word;
-	color: var(--aeq-ink);
+	background: var(--paper);
+	color: var(--ink);
+	font-family: var(--font-body);
 	font-size: 1.125rem;
 	line-height: 1.6;
+	overflow-wrap: break-word;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 }
+
 main {
-	width: 720px;
-	max-width: calc(100% - 2em);
-	margin: auto;
-	padding: 3em 1em;
+	display: block;
 }
+
 h1,
 h2,
 h3,
-h4,
-h5,
-h6 {
-	margin: 0 0 0.5rem 0;
-	color: rgb(var(--black));
-	line-height: 1.2;
+h4 {
+	font-family: var(--font-display);
+	font-weight: 600;
+	font-variation-settings: "SOFT" 100, "WONK" 1;
+	color: var(--pine);
+	line-height: 1.12;
+	margin: 0 0 0.5em;
+	text-wrap: balance;
 }
 h1 {
-	font-size: 3.052em;
+	font-size: clamp(2.4rem, 5.5vw, 3.75rem);
+	letter-spacing: -0.015em;
 }
 h2 {
-	font-size: 2.441em;
+	font-size: clamp(1.75rem, 3.4vw, 2.35rem);
+	letter-spacing: -0.01em;
 }
 h3 {
-	font-size: 1.953em;
+	font-size: 1.35rem;
 }
 h4 {
-	font-size: 1.563em;
+	font-size: 1.125rem;
 }
-h5 {
-	font-size: 1.25em;
+h1 em,
+h2 em {
+	font-style: italic;
+	font-weight: 500;
+	color: var(--coral-strong);
 }
+
+p {
+	margin: 0 0 1em;
+	text-wrap: pretty;
+}
+
+a {
+	color: var(--coral-deep);
+	text-decoration-thickness: 1.5px;
+	text-underline-offset: 3px;
+}
+a:hover {
+	color: var(--pine);
+}
+
 strong,
 b {
 	font-weight: 700;
 }
-a {
-	color: var(--accent);
-}
-a:hover {
-	color: var(--accent);
-}
-p {
-	margin-bottom: 1em;
-}
-.prose p {
-	margin-bottom: 2em;
-}
-textarea {
-	width: 100%;
-	font-size: 1rem;
-}
-input {
-	font-size: 1rem;
-}
-table {
-	width: 100%;
-}
+
 img {
 	max-width: 100%;
 	height: auto;
-	border-radius: 8px;
 }
+
 code {
-	padding: 2px 5px;
-	background-color: rgb(var(--gray-light));
-	border-radius: 2px;
+	font-size: 0.9em;
+	padding: 2px 6px;
+	background: var(--paper-deep);
+	border-radius: 6px;
 }
-pre {
-	padding: 1.5em;
-	border-radius: 8px;
-}
-pre > code {
-	all: unset;
-}
-blockquote {
-	border-left: 4px solid var(--accent);
-	padding: 0 0 0 20px;
-	margin: 0px;
-	font-size: 1.333em;
-}
+
 hr {
 	border: none;
-	border-top: 1px solid rgb(var(--gray-light));
-}
-@media (max-width: 720px) {
-	body {
-		font-size: 1.125rem;
-	}
-	main {
-		padding: 1em;
-	}
+	border-top: 1px solid var(--line);
 }
 
-/* ---- Aequus Archers brand tokens ----
-   Palette drawn from the logo: blue arc + warm orange.
-   Rename/retune here and the whole site follows. */
-:root {
-	--aeq-primary: #2d2a27;
-	--aeq-primary-dark: #1f1c1a;
-	--aeq-primary-soft: #ece2ce;
-	--aeq-accent: #d4271a;
-	--aeq-accent-text: #a31a0f;
-	--aeq-accent-soft: #fbe7e3;
-	--aeq-blue: #1f93c7;
-	--aeq-cream: #f6f1e6;
-	--aeq-ink: #2d2a27;
-	--aeq-muted: #574f45;
-	--aeq-line: #e7ddcb;
-	--aeq-tile: #f1ebde;
-	--aeq-radius: 14px;
-	--aeq-font: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
-	--aeq-font-display: "Iowan Old Style", "Palatino Linotype", Palatino, Georgia, "Times New Roman", serif;
+/* ---- Layout helpers ---- */
+.wrap {
+	max-width: var(--wrap);
+	margin: 0 auto;
+	padding-left: 20px;
+	padding-right: 20px;
 }
 
-/* Full-width pages opt out of the template's centred 720px column. */
-main.aeq {
-	width: auto;
-	max-width: none;
-	margin: 0;
+.kicker {
+	display: inline-block;
+	font-family: var(--font-display);
+	font-style: italic;
+	font-size: 1.125rem;
+	color: var(--coral-deep);
+	margin: 0 0 10px;
+}
+
+.lede {
+	font-size: 1.2rem;
+	color: var(--muted);
+	max-width: 52ch;
+}
+
+.muted {
+	color: var(--muted);
+}
+
+.pills {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+	list-style: none;
 	padding: 0;
-	background: var(--aeq-cream);
-	font-family: var(--aeq-font);
-	color: var(--aeq-ink);
-	line-height: 1.55;
+	margin: 0;
+}
+.pills li {
+	font-size: 0.95rem;
+	font-weight: 600;
+	background: var(--pine-soft);
+	padding: 5px 14px;
+	border-radius: 999px;
 }
 
-/* Display headings get the warm serif — the club's Latin name deserves it. */
-main.aeq h1,
-main.aeq h2,
-main.aeq h3 {
-	font-family: var(--aeq-font-display);
+.note {
+	background: var(--butter-soft);
+	border-radius: var(--radius-s);
+	padding: 14px 18px;
+	font-size: 1rem;
+	color: var(--pine);
+	max-width: 70ch;
+}
+
+.panel {
+	background: var(--card);
+	border-radius: var(--radius);
+	padding: 24px 26px;
+	box-shadow: 0 1px 0 var(--line);
+}
+
+.card-grid {
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+	gap: 28px 24px;
+}
+
+/* ---- Buttons ---- */
+.btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	background: var(--coral-strong);
+	color: #fff;
+	font-family: var(--font-body);
 	font-weight: 700;
-	letter-spacing: 0;
+	font-size: 1.0625rem;
+	line-height: 1.2;
+	text-decoration: none;
+	padding: 14px 26px;
+	border: 2px solid transparent;
+	border-radius: 999px;
+	cursor: pointer;
+}
+.btn:hover {
+	background: var(--coral-deep);
+	color: #fff;
+	transform: translateY(-1px);
+}
+.btn--ghost {
+	background: transparent;
+	color: var(--pine);
+	border-color: var(--pine);
+}
+.btn--ghost:hover {
+	background: var(--pine);
+	color: var(--paper);
+}
+.btn--butter {
+	background: var(--butter);
+	color: var(--pine);
+}
+.btn--butter:hover {
+	background: #f7dc93;
+	color: var(--pine);
+}
+.btn--big {
+	font-size: 1.125rem;
+	padding: 16px 32px;
 }
 
-/* ---- Polish: smooth, consistent interactions ---- */
+.textlink {
+	display: inline-block;
+	font-weight: 700;
+	color: var(--pine);
+	text-decoration: none;
+	padding: 6px 0;
+	border-bottom: 2px solid var(--coral);
+}
+.textlink:hover {
+	color: var(--coral-deep);
+}
+
+/* ---- Photos ---- */
+.photo {
+	display: block;
+	width: 100%;
+	object-fit: cover;
+	border-radius: var(--radius-photo);
+	background: var(--paper-deep);
+}
+.photo--offset {
+	box-shadow: 14px 14px 0 var(--butter);
+}
+.photo--offset-sage {
+	box-shadow: -14px 14px 0 var(--sage);
+}
+
+/* Contains floated inline photos (Figure.astro) within their section */
+.has-figure {
+	display: flow-root;
+}
+
+/* ---- Interaction ---- */
 a,
 button,
 .btn,
@@ -182,55 +286,37 @@ textarea {
 		background-color 0.15s ease,
 		border-color 0.15s ease,
 		box-shadow 0.15s ease,
-		filter 0.15s ease,
-		transform 0.1s ease;
-}
-.btn:active {
-	transform: translateY(1px);
+		transform 0.15s ease;
 }
 
-/* Keyboard users get a clear, consistent focus ring everywhere */
 a:focus-visible,
 button:focus-visible,
 input:focus-visible,
 textarea:focus-visible,
 summary:focus-visible {
-	outline: 3px solid var(--aeq-blue);
-	outline-offset: 2px;
+	outline: 3px solid var(--sky);
+	outline-offset: 3px;
 }
 
 @media (prefers-reduced-motion: reduce) {
-	a,
-	button,
-	.btn,
-	input,
-	textarea {
-		transition: none;
+	*,
+	*::before,
+	*::after {
+		transition: none !important;
 	}
-	.btn:active {
+	.btn:hover {
 		transform: none;
 	}
 }
 
-/* Contains floated inline photos (Figure.astro) within their section */
-.has-figure {
-	display: flow-root;
-}
-
 .sr-only {
-	border: 0;
-	padding: 0;
-	margin: 0;
 	position: absolute !important;
-	height: 1px;
 	width: 1px;
+	height: 1px;
+	padding: 0;
+	margin: -1px;
 	overflow: hidden;
-	/* IE6, IE7 - a 0 height clip, off to the bottom right of the visible 1px box */
-	clip: rect(1px 1px 1px 1px);
-	/* maybe deprecated but we need to support legacy browsers */
-	clip: rect(1px, 1px, 1px, 1px);
-	/* modern browsers, clip-path works inwards from each corner */
 	clip-path: inset(50%);
-	/* added line to stop words getting smushed together (as they go onto separate lines and some screen readers do not understand line feeds as a space */
 	white-space: nowrap;
+	border: 0;
 }

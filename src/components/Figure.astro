@@ -1,20 +1,14 @@
 ---
 /*
-  Inline candid photo with an optional caption.
+  Inline photo with an optional caption.
 
-  Designed so photos can be added later: point `src` at a file in
-  /public/images (a friendly placeholder already lives at each path),
-  then just drop your real photo in at the same filename — no code change.
-
-  Usage:
-    <Figure src="/images/community/club-day.jpg"
-            alt="Members on the shooting line at a club day"
-            caption="A club day on the field at Milford"
-            align="right" />
+  Point `src` at a file in /public/images. To swap a placeholder for a real
+  photo, drop the new file in at the same path.
 
   align: "right" | "left" | "full"  (right/left float beside text on desktop,
                                      full spans the column; all stack on mobile)
   ratio: CSS aspect-ratio, e.g. "4 / 3" (default) or "3 / 2"
+  accent: colour block offset behind the photo
 */
 interface Props {
 	src: string;
@@ -22,13 +16,23 @@ interface Props {
 	caption?: string;
 	align?: "right" | "left" | "full";
 	ratio?: string;
+	accent?: "butter" | "sage" | "none";
 	eager?: boolean;
 }
-const { src, alt, caption = "", align = "right", ratio = "4 / 3", eager = false } = Astro.props;
+const {
+	src,
+	alt,
+	caption = "",
+	align = "right",
+	ratio = "4 / 3",
+	accent = "none",
+	eager = false,
+} = Astro.props;
 ---
 
-<figure class:list={["aeq-figure", align]}>
+<figure class:list={["fig", align]}>
 	<img
+		class:list={["photo", { "photo--offset": accent === "butter", "photo--offset-sage": accent === "sage" }]}
 		src={src}
 		alt={alt}
 		loading={eager ? "eager" : "lazy"}
@@ -39,42 +43,31 @@ const { src, alt, caption = "", align = "right", ratio = "4 / 3", eager = false 
 </figure>
 
 <style>
-	.aeq-figure {
-		margin: 0 0 18px;
+	.fig {
+		margin: 0 0 24px;
 	}
-	.aeq-figure img {
-		width: 100%;
-		display: block;
-		object-fit: cover;
-		border-radius: var(--aeq-radius);
-		border: 1px solid var(--aeq-line);
-		background: var(--aeq-tile);
-	}
-	.aeq-figure figcaption {
-		font-size: 1rem;
-		color: var(--aeq-muted);
+	figcaption {
+		font-family: var(--font-display);
 		font-style: italic;
-		margin-top: 8px;
+		font-size: 1rem;
+		color: var(--muted);
+		margin-top: 18px;
 		line-height: 1.45;
 	}
-	/* Floated, sits beside text on wider screens */
-	.aeq-figure.right,
-	.aeq-figure.left {
-		max-width: 380px;
-	}
-	.aeq-figure.full {
-		max-width: none;
+	.right,
+	.left {
+		max-width: 420px;
 	}
 	@media (min-width: 760px) {
-		.aeq-figure.right {
+		.right {
 			float: right;
 			width: 42%;
-			margin: 4px 0 14px 28px;
+			margin: 6px 14px 20px 36px;
 		}
-		.aeq-figure.left {
+		.left {
 			float: left;
 			width: 42%;
-			margin: 4px 28px 14px 0;
+			margin: 6px 36px 20px 14px;
 		}
 	}
 </style>

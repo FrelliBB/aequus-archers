@@ -1,128 +1,69 @@
 ---
-import BaseHead from "../components/BaseHead.astro";
-import Header from "../components/Header.astro";
-import Footer from "../components/Footer.astro";
+import Base from "./Base.astro";
 import { SITE_TITLE } from "../consts";
 
 interface Props {
 	title: string;
 	description?: string;
 	intro?: string;
+	kicker?: string;
 }
 
-const { title, description = "", intro = "" } = Astro.props;
+const { title, description = "", intro = "", kicker = "" } = Astro.props;
 ---
 
-<!doctype html>
-<html lang="en">
-	<head>
-		<BaseHead title={`${title} | ${SITE_TITLE}`} description={description || title} />
-	</head>
-	<body>
-		<Header />
-		<main class="aeq">
-			<section class="page-head">
-				<div class="inner">
-					<h1>{title}</h1>
-					{intro && <p>{intro}</p>}
-				</div>
-			</section>
-			<div class="page-wrap">
-				<slot />
-			</div>
-		</main>
-		<Footer />
-		<style>
-			.page-head {
-				background: var(--aeq-primary);
-				color: #fff;
-			}
-			.page-head .inner {
-				max-width: 1040px;
-				margin: 0 auto;
-				padding: 40px 20px;
-			}
-			.page-head h1 {
-				color: #fff;
-				font-weight: 700;
-				font-size: clamp(1.75rem, 4vw, 2.5rem);
-				margin: 0 0 8px;
-			}
-			.page-head p {
-				margin: 0;
-				font-size: 1.0625rem;
-				opacity: 0.92;
-				max-width: 60ch;
-			}
-			.page-wrap {
-				max-width: 1040px;
-				margin: 0 auto;
-				padding: 36px 20px 52px;
-			}
-			.badge {
-				display: inline-block;
-				color: var(--aeq-accent-text);
-				font-style: italic;
-				font-size: 1rem;
-				margin-bottom: 14px;
-			}
-		</style>
-		<style is:global>
-			.aeq .page-wrap h2 {
-				font-size: 1.5rem;
-				font-weight: 700;
-				color: var(--aeq-primary-dark);
-				margin: 0 0 8px;
-			}
-			.aeq .page-wrap h3 {
-				font-size: 1.125rem;
-				font-weight: 700;
-				color: var(--aeq-primary-dark);
-				margin: 0 0 4px;
-			}
-			.aeq .page-wrap p {
-				font-size: 1.0625rem;
-				color: var(--aeq-ink);
-				margin: 0 0 14px;
-				max-width: 70ch;
-			}
-			.aeq .page-wrap p.muted {
-				color: var(--aeq-muted);
-				font-size: 1rem;
-			}
-			.aeq .page-wrap section {
-				margin-bottom: 40px;
-			}
-			.aeq .card-grid {
-				display: grid;
-				grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-				gap: 24px;
-			}
-			.aeq .panel {
-				background: #fff;
-				border: 1px solid var(--aeq-line);
-				border-radius: var(--aeq-radius);
-				padding: 22px 24px;
-			}
-			.aeq .btn {
-				display: inline-block;
-				background: var(--aeq-accent);
-				color: #fff;
-				font-weight: 700;
-				font-size: 1.0625rem;
-				text-decoration: none;
-				padding: 12px 24px;
-				border-radius: 999px;
-			}
-			.aeq .btn:hover {
-				filter: brightness(1.05);
-			}
-			.aeq .note {
-				border-left: 3px solid var(--aeq-line);
-				padding: 2px 0 2px 16px;
-				font-size: 1rem;
-				color: var(--aeq-muted);
-			}
-		</style>
-	</body>
-</html>
+<Base title={`${title} | ${SITE_TITLE}`} description={description || title}>
+	<section class="page-head">
+		<div class="wrap">
+			{kicker && <p class="kicker">{kicker}</p>}
+			<h1>{title}</h1>
+			{intro && <p class="lede">{intro}</p>}
+		</div>
+	</section>
+	<div class="wrap page-body">
+		<slot />
+	</div>
+</Base>
+
+<style>
+	.page-head {
+		padding: 56px 0 8px;
+	}
+	.page-head h1 {
+		max-width: 20ch;
+		margin-bottom: 14px;
+	}
+	.page-head .lede {
+		margin: 0;
+	}
+	.page-body {
+		padding-top: 40px;
+	}
+</style>
+<style is:global>
+	.page-body > section {
+		margin-bottom: 64px;
+	}
+	.page-body h2 {
+		font-size: clamp(1.6rem, 3vw, 2rem);
+	}
+	.page-body p {
+		max-width: 68ch;
+	}
+	.page-body .outro {
+		background: var(--pine-soft);
+		border-radius: var(--radius-l);
+		padding: 44px 28px;
+		text-align: center;
+	}
+	.page-body .outro p {
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.page-body .actions {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 12px;
+		justify-content: center;
+	}
+</style>

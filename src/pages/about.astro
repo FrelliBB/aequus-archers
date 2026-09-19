@@ -5,121 +5,121 @@ import Figure from "../components/Figure.astro";
 
 <Page
 	title="About us"
+	kicker="Since 2012"
 	description="Aequus Archers is a friendly, volunteer-run target archery club in Milford, Derbyshire, welcoming archers of every age and ability since 2012."
-	intro="A friendly, volunteer-run target archery club in Milford, Derbyshire — welcoming archers of every age and ability since 2012."
+	intro="A friendly, volunteer-run target archery club in Milford, Derbyshire, welcoming archers of every age and ability since 2012."
 >
 	<section class="has-figure">
 		<Figure
 			src="/images/community/our-story.jpg"
 			alt="Aequus Archers members over the years"
-			caption="Archers of every age and ability — the club since 2012."
+			caption="Archers of every age and ability."
 			align="right"
+			accent="butter"
 		/>
 		<h2>Who we are</h2>
 		<p>
-			Founded in 2012 by a passionate group of coaches, Aequus Archers exists to promote archery as
-			a sport for everyone — irrespective of age, gender, ethnicity, background or circumstance.
+			A group of coaches started Aequus Archers in 2012 to make archery a sport for everyone,
+			whatever your age, gender, ethnicity, background or circumstance.
 		</p>
 		<p>
-			Our name says it all: <em>aequus</em> is Latin for even, calm, equal, favourable, just and fair
-			— the spirit we try to bring to every session.
+			<em>Aequus</em> is Latin for even, calm, equal, favourable, just and fair. That is the spirit
+			we try to bring to every session.
 		</p>
 	</section>
 
 	<section>
 		<h2>What we offer</h2>
-		<p>
-			Whether you’re curious to try something new or ready to take it further, there’s a welcoming
-			way in.
-		</p>
-		<div class="offer-grid">
+		<p>Whether you want to try something new or take it further, there is a way in for you.</p>
+		<div class="offers">
 			<div class="offer">
 				<h3>Taster sessions</h3>
-				<p class="muted">A one-off 1.5-hour session to give archery a go. All equipment provided.</p>
-				<a class="offer-link" href="/sessions">See dates →</a>
+				<p>A one-off 1.5-hour session to give archery a go. All equipment provided.</p>
+				<a class="textlink" href="/sessions">See dates</a>
 			</div>
 			<div class="offer">
 				<h3>Beginner’s courses</h3>
-				<p class="muted">
-					Four weekend sessions to learn the fundamentals and earn your Archery GB certificate.
-				</p>
-				<a class="offer-link" href="/sessions">See dates →</a>
+				<p>Four weekend sessions to learn the basics and earn your Archery GB certificate.</p>
+				<a class="textlink" href="/sessions">See dates</a>
 			</div>
 			<div class="offer">
 				<h3>Membership</h3>
-				<p class="muted">Completed a course? Join us and shoot regularly through the season.</p>
-				<a class="offer-link" href="#membership">How to join →</a>
+				<p>Finished a course? Join us and shoot regularly through the season.</p>
+				<a class="textlink" href="#membership">How to join</a>
 			</div>
 		</div>
 	</section>
 
-	<section id="membership">
+	<section id="membership" class="membership">
 		<h2>Becoming a member</h2>
 		<p>
 			To join an Archery GB–affiliated club like ours, you first need to complete a beginner’s
-			course and receive your certificate. Once you have it, you’re welcome to join Aequus Archers
-			and shoot with us regularly throughout the season.
+			course and receive your certificate. Then you are welcome to join Aequus Archers and shoot
+			with us regularly through the season.
 		</p>
-		<p class="note">
-			Membership fees and how to pay are managed through the club — get in touch and we’ll talk
-			you through it.
+		<p>
+			Membership fees and how to pay are managed by the club. Get in touch and we will talk you
+			through it.
 		</p>
 		<a class="btn" href="/contact">Ask about membership</a>
 	</section>
 
 	<section id="location" class="has-figure">
-		<h2>Where to find us</h2>
 		<Figure
 			src="/images/community/the-field.jpg"
 			alt="The Aequus Archers outdoor field at Milford, Derbyshire"
-			caption="Our outdoor field at Milford — free parking and a warm welcome."
+			caption="Our outdoor field at Milford."
 			align="left"
+			accent="sage"
 		/>
+		<h2>Where to find us</h2>
 		<p>
 			All sessions take place at our outdoor field in Milford, Derbyshire, during the summer
-			season. Free parking and a warm welcome await.
+			season. Parking is free.
 		</p>
 		<p class="note">
-			Exact directions, parking details and a map will be added here — for now, please <a
-				href="/contact">contact us</a
+			Directions, parking details and a map are coming soon. Until then, <a href="/contact"
+				>contact us</a
 			> if you need help finding us.
 		</p>
 	</section>
 
 	<section class="outro">
 		<h2>Come and have a go</h2>
-		<p style="margin-left:auto;margin-right:auto;">
-			Beginners are always welcome — pick a taster or course date to get started.
-		</p>
-		<a class="btn" href="/sessions">View upcoming sessions</a>
+		<p>Beginners are always welcome. Pick a taster or course date to get started.</p>
+		<a class="btn" href="/sessions">See upcoming sessions</a>
 	</section>
 
 	<style>
-		.offer-grid {
+		.offers {
 			display: grid;
 			grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-			gap: 28px;
-			margin-top: 20px;
+			gap: 20px;
+			margin-top: 24px;
 		}
 		.offer {
-			border-top: 2px solid var(--aeq-line);
-			padding-top: 14px;
+			border-radius: var(--radius);
+			padding: 24px;
+			background: var(--pine-soft);
 		}
-		.offer-link {
-			display: inline-block;
-			font-weight: 700;
-			font-size: 1.0625rem;
-			color: var(--aeq-accent-text);
-			text-decoration: none;
-			padding: 8px 0;
+		.offer:nth-child(2) {
+			background: var(--butter-soft);
 		}
-		.offer-link:hover {
-			text-decoration: underline;
+		.offer:nth-child(3) {
+			background: var(--coral-soft);
 		}
-		.outro {
-			text-align: center;
-			padding-top: 36px;
-			border-top: 2px solid var(--aeq-line);
+		.offer p {
+			font-size: 1rem;
+		}
+		.membership {
+			background: var(--card);
+			border-radius: var(--radius-l);
+			padding: 36px;
+		}
+		@media (max-width: 640px) {
+			.membership {
+				padding: 26px 22px;
+			}
 		}
 	</style>
 </Page>
